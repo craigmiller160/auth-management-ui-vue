@@ -1,16 +1,16 @@
 <template>
   <nav class="navbar navbar-expand navbar-dark">
-    <a class="navbar-brand" href="#">OAuth Management</a>
+    <router-link to="/" class="navbar-brand">OAuth Management</router-link>
     <button class="navbar-toggler" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a href="#" class="nav-link">Users</a>
+          <router-link to="/users" class="nav-link">Users</router-link>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">Clients</a>
+          <router-link to="/clients" class="nav-link">Clients</router-link>
         </li>
       </ul>
       <ul class="navbar-nav">
