@@ -1,8 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand navbar-light bg-light">
+  <nav class="navbar navbar-expand navbar-dark">
+    <button class="navbar-toggler" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <a class="navbar-brand" href="#">Logo</a>
   </nav>
-  <h1>Hello World</h1>
 </template>
 
 <script>
@@ -14,7 +16,13 @@ export default {
 
 <style scoped lang="scss">
   @import "../assets/scss/variables";
-  h1 {
-    color: $blue;
+
+  .navbar {
+    background-color: $orange;
+    &.navbar-expand {
+      .navbar-toggler {
+        margin-right: 1rem;
+      }
+    }
   }
 </style>
