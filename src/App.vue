@@ -1,8 +1,11 @@
 <template>
   <h1>Auth Management UI</h1>
   <p><strong>Count:</strong> {{ state.count }}</p>
-  <button @click="increment">Increment</button>
-  <button @click="decrement">Decrement</button>
+  <button class="btn waves-effect waves-light" @click="increment">
+    Increment
+    <i class="material-icons right">send</i>
+  </button>
+  <button class="btn" @click="decrement">Decrement</button>
 </template>
 
 <script>
@@ -27,7 +30,10 @@ export default {
 </script>
 
 <style lang="scss">
-  h1 {
-    color: blue;
+  body {
+    padding: 2rem;
+    h1 {
+      color: blue;
+    }
   }
 </style>
