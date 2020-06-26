@@ -1,7 +1,7 @@
 <template>
   <h1>Auth Management UI</h1>
   <p><strong>Count:</strong> {{ state.count }}</p>
-  <button class="btn waves-effect waves-light" @click="increment">
+  <button class="btn waves-effect waves-light blue black-text" @click="increment">
     Increment
     <i class="material-icons right">send</i>
   </button>
