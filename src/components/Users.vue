@@ -1,23 +1,25 @@
 <template>
-  <Header text="Users" />
-  <div class="row">
-    <div class="col">
-      <table class="table">
-        <thead>
+  <div class="container">
+    <Header text="Users" />
+    <div class="row">
+      <div class="col">
+        <table class="table">
+          <thead>
           <tr>
             <th>Email</th>
             <th>First Name</th>
             <th>Last Name</th>
           </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
           <tr v-for="user in state.data" :key="user.email">
             <td>{{ user.email }}</td>
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
           </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
