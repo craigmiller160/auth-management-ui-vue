@@ -8,5 +8,5 @@ export default Vuex.createStore({
   actions: {
   },
   modules: {
-  },
+  }
 });
