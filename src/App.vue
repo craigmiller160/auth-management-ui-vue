@@ -2,15 +2,19 @@
   <Navbar />
   <Home />
   <Clients />
+  <Users />
 </template>
 
 <script>
 import Navbar from '@/components/Navbar';
 import Home from '@/components/Home';
 import Clients from '@/components/Clients';
+import Users from '@/components/Users';
 
 export default {
-  components: { Clients, Home, Navbar }
+  components: {
+    Users, Clients, Home, Navbar
+  }
 };
 </script>
 
