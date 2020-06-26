@@ -1,12 +1,7 @@
 <template>
-  <div class="mui-appbar">
-    <table width="100%">
-      <tr>
-        <td class="mui--appbar-height">Left Side</td>
-        <td class="mui-appbar-height" align="right">Right Side</td>
-      </tr>
-    </table>
-  </div>
+  <nav class="navbar navbar-expand navbar-light bg-light">
+    <a class="navbar-brand" href="#">Logo</a>
+  </nav>
 </template>
 
 <script>
