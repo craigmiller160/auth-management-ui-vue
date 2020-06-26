@@ -10,13 +10,13 @@
       </ul>
     </div>
   </nav>
-  <ul class="side-nav orange closed">
+  <ul class="sidenav orange closed">
     <li><a href="#" class="white-text">Login</a></li>
   </ul>
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
 
 export default {
   name: 'Navbar',
@@ -29,6 +29,10 @@ export default {
       console.log('Click'); // TODO delete this
       state.drawerOpen = !state.drawerOpen;
     };
+
+    onMounted(() => {
+
+    });
 
     return {
       state,
