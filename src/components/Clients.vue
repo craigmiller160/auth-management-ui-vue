@@ -11,7 +11,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="client in state.data">
+            <tr v-for="client in state.data" :key="client.key">
               <td>{{ client.name }}</td>
               <td>{{ client.key }}</td>
             </tr>
