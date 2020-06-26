@@ -1,21 +1,14 @@
 <template>
   <div class="container">
-    <div class="welcome">
-      <h1 class="text-center">Welcome to OAuth Management</h1>
-      <hr />
-    </div>
-
+    <Header text="Welcome to OAuth Management" />
   </div>
 </template>
 
 <script>
+import Header from '@/components/ui/Header';
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: { Header }
 };
 </script>
-
-<style scoped>
-  .welcome {
-    margin-top: 1rem;
-  }
-</style>
