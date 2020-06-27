@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header text="Welcome to OAuth Management" />
+    <Header text="Welcome to OAuth2 Management" />
   </div>
 </template>
 
