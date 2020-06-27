@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand navbar-dark">
-    <router-link to="/" class="navbar-brand">OAuth Management</router-link>
+    <router-link to="/" class="navbar-brand">OAuth2 Management</router-link>
     <button class="navbar-toggler" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
