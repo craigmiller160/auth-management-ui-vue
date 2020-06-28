@@ -8,7 +8,7 @@ const sampleData = { // eslint-disable-line no-unused-vars
 };
 
 const state = {
-  userData: null
+  userData: sampleData
 };
 
 const mutations = {
