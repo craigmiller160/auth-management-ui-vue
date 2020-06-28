@@ -25,28 +25,21 @@
 </template>
 
 <script>
-  import { reactive } from 'vue';
+  import { reactive, onMounted } from 'vue';
   import Header from '@/components/ui/Header';
-
-  const users = [
-    {
-      email: 'craig@gmail.com',
-      firstName: 'Craig',
-      lastName: 'Miller'
-    },
-    {
-      email: 'bob@gmail.com',
-      firstName: 'Bob',
-      lastName: 'Saget'
-    }
-  ];
+  import { getUsers } from '@/service/BasicService';
 
   export default {
     name: 'Users',
     components: { Header },
     setup() {
       const state = reactive({
-        data: users
+        data: []
+      });
+
+      onMounted(async () => {
+        const userData = await getUsers();
+        state.data = userData.users;
       });
 
       return {
