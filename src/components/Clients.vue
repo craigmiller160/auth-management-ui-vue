@@ -23,26 +23,20 @@
 </template>
 
 <script>
-  import { reactive } from 'vue';
+  import { reactive, onMounted } from 'vue';
   import Header from '@/components/ui/Header';
-
-  const clients = [
-    {
-      name: 'Client 1',
-      key: 'key1'
-    },
-    {
-      name: 'Client 2',
-      key: 'key2'
-    }
-  ];
+  import { getClients } from '@/service/BasicService';
 
   export default {
     name: 'Clients',
     components: { Header },
     setup() {
       const state = reactive({
-        data: clients
+        data: []
+      });
+
+      onMounted(async () => {
+        state.data = await getClients();
       });
 
       return {
