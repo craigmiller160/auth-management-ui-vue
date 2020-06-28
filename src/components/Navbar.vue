@@ -24,9 +24,12 @@
 
 <script>
 
-export default {
-  name: 'Navbar'
-};
+  export default {
+    name: 'Navbar',
+    setup() {
+
+    }
+  };
 </script>
 
 <style scoped lang="scss">

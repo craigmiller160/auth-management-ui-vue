@@ -25,35 +25,35 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
-import Header from '@/components/ui/Header';
+  import { reactive } from 'vue';
+  import Header from '@/components/ui/Header';
 
-const users = [
-  {
-    email: 'craig@gmail.com',
-    firstName: 'Craig',
-    lastName: 'Miller'
-  },
-  {
-    email: 'bob@gmail.com',
-    firstName: 'Bob',
-    lastName: 'Saget'
-  }
-];
+  const users = [
+    {
+      email: 'craig@gmail.com',
+      firstName: 'Craig',
+      lastName: 'Miller'
+    },
+    {
+      email: 'bob@gmail.com',
+      firstName: 'Bob',
+      lastName: 'Saget'
+    }
+  ];
 
-export default {
-  name: 'Users',
-  components: { Header },
-  setup() {
-    const state = reactive({
-      data: users
-    });
+  export default {
+    name: 'Users',
+    components: { Header },
+    setup() {
+      const state = reactive({
+        data: users
+      });
 
-    return {
-      state
-    };
-  }
-};
+      return {
+        state
+      };
+    }
+  };
 </script>
 
 <style scoped>

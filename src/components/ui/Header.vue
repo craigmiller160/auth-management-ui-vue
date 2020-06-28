@@ -6,17 +6,17 @@
 </template>
 
 <script>
-export default {
-  name: 'Header',
-  props: {
-    text: String
-  },
-  setup(props) {
-    return {
-      props
-    };
-  }
-};
+  export default {
+    name: 'Header',
+    props: {
+      text: String
+    },
+    setup(props) {
+      return {
+        props
+      };
+    }
+  };
 </script>
 
 <style scoped>
