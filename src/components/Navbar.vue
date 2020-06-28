@@ -15,7 +15,7 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a href="#" class="nav-link">Login</a>
+          <a href="/api/authcode/login" class="nav-link">Login</a>
         </li>
       </ul>
     </div>
