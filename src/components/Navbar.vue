@@ -14,8 +14,16 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item" v-if="!auth.userData">
           <a href="/api/authcode/login" class="nav-link">Login</a>
+        </li>
+        <li class="nav-item dropdown" v-if="auth.userData">
+          <a @click="toggleDropdown" class="nav-link dropdown-toggle">
+            {{ auth.userData.firstName }} {{ auth.userData.lastName }}
+          </a>
+          <div :class="dropdownClasses">
+            <a class="dropdown-item">Logout</a>
+          </div>
         </li>
       </ul>
     </div>
@@ -23,11 +31,32 @@
 </template>
 
 <script>
+  import { ref, computed } from 'vue';
+  import { useStore } from 'vuex';
+
+  // TODO need to implement logout behavior
 
   export default {
     name: 'Navbar',
     setup() {
+      const store = useStore();
+      const showDropdown = ref(false);
 
+      const dropdownClasses = computed(() => {
+        const show = showDropdown.value ? 'show' : '';
+        return `dropdown-menu ${show}`;
+      });
+
+      const toggleDropdown = () => {
+        showDropdown.value = !showDropdown.value;
+      };
+
+      return {
+        auth: store.state.auth,
+        showDropdown,
+        toggleDropdown,
+        dropdownClasses
+      };
     }
   };
 </script>
@@ -45,6 +74,10 @@
 
       .nav-link {
         color: $white;
+
+        &.dropdown-toggle {
+          cursor: pointer;
+        }
       }
     }
   }
