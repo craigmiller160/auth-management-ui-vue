@@ -17,8 +17,15 @@ const mutations = {
   }
 };
 
+const getters = {
+  isAuthorized(storeState) {
+    return !!storeState.userData;
+  }
+};
+
 export default {
   namespaced: true,
   state,
-  mutations
+  mutations,
+  getters
 };

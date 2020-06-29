@@ -14,12 +14,12 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-        <li class="nav-item" v-if="!auth.userData">
+        <li class="nav-item" v-if="!isAuthorized">
           <a href="/api/authcode/login" class="nav-link">Login</a>
         </li>
-        <li class="nav-item dropdown" v-if="auth.userData">
+        <li class="nav-item dropdown" v-if="isAuthorized">
           <a @click="toggleDropdown" class="nav-link dropdown-toggle">
-            {{ auth.userData.firstName }} {{ auth.userData.lastName }}
+            {{ userData.firstName }} {{ userData.lastName }}
           </a>
           <div :class="dropdownClasses">
             <a class="dropdown-item">Logout</a>
@@ -33,6 +33,7 @@
 <script>
   import { ref, computed } from 'vue';
   import { useStore } from 'vuex';
+  import { GETTER_IS_AUTHORIZED } from '@/store/modules/auth/keys';
 
   // TODO need to implement logout behavior
 
@@ -52,7 +53,8 @@
       };
 
       return {
-        auth: store.state.auth,
+        userData: store.state.auth.userData,
+        isAuthorized: store.getters[GETTER_IS_AUTHORIZED],
         showDropdown,
         toggleDropdown,
         dropdownClasses
