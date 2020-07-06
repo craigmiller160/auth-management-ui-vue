@@ -19,9 +19,11 @@
         return `alert ${show} ${typeClass}`;
       });
 
+      const message = computed(() => store.state.alert.details.message);
+
       return {
         alertClasses,
-        message: store.state.alert.details.message
+        message
       };
     }
   };
