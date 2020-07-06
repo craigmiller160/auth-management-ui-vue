@@ -24,7 +24,7 @@
             {{ userData.firstName }} {{ userData.lastName }}
           </a>
           <div :class="dropdownClasses">
-            <a class="dropdown-item">Logout</a>
+            <a class="dropdown-item" @click="doLogout">Logout</a>
           </div>
         </li>
       </ul>
@@ -35,7 +35,9 @@
 <script>
   import { ref, computed } from 'vue';
   import { useStore } from 'vuex';
-  import { GETTER_IS_AUTHORIZED } from '@/store/modules/auth/keys';
+  import { GETTER_IS_AUTHORIZED, MUTATION_SET_USER_DATA } from '@/store/modules/auth/keys';
+  import { logout } from '@/service/AuthService';
+  import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
 
   // TODO need to implement logout behavior
 
@@ -57,12 +59,23 @@
         showDropdown.value = !showDropdown.value;
       };
 
+      const doLogout = async () => {
+        try {
+          await logout();
+          store.commit(MUTATION_SET_USER_DATA, null);
+        } catch (ex) {
+          console.log(ex);
+          store.commit(MUTATION_SHOW_ERROR_ALERT, `Error logging out: ${ex.message}`);
+        }
+      };
+
       return {
         userData,
         isAuthorized,
         showDropdown,
         toggleDropdown,
-        dropdownClasses
+        dropdownClasses,
+        doLogout
       };
     }
   };
@@ -85,6 +98,12 @@
         &.dropdown-toggle {
           cursor: pointer;
         }
+      }
+    }
+
+    .dropdown-menu {
+      .dropdown-item {
+        cursor: pointer;
       }
     }
   }
