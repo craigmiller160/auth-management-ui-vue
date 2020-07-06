@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/components/Home';
 import Users from '@/components/Users';
 import Clients from '@/components/Clients';
+import { isAuthorizedGuard } from '@/router/guards';
 
 const routes = [
   {
@@ -12,12 +13,14 @@ const routes = [
   {
     path: '/users',
     name: 'Users',
-    component: Users
+    component: Users,
+    beforeEnter: isAuthorizedGuard
   },
   {
     path: '/clients',
     name: 'Clients',
-    component: Clients
+    component: Clients,
+    beforeEnter: isAuthorizedGuard
   }
 ];
 
