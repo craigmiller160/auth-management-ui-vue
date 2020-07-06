@@ -25,21 +25,29 @@
 </template>
 
 <script>
+  import { useStore } from 'vuex';
   import { reactive, onMounted } from 'vue';
   import Header from '@/components/ui/Header';
   import { getUsers } from '@/service/BasicService';
+  import { SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
 
   export default {
     name: 'Users',
     components: { Header },
     setup() {
+      const store = useStore();
       const state = reactive({
         data: []
       });
 
       onMounted(async () => {
-        const userData = await getUsers();
-        state.data = userData.users;
+        try {
+          const userData = await getUsers();
+          state.data = userData.users;
+        } catch (ex) {
+          console.log(ex);
+          store.dispatch(SHOW_ERROR_ALERT, `Error loading users: ${ex.message}`);
+        }
       });
 
       return {
