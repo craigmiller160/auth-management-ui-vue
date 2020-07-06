@@ -6,12 +6,14 @@
     </button>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link to="/users" class="nav-link">Users</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/clients" class="nav-link">Clients</router-link>
-        </li>
+        <template v-if="isAuthorized">
+          <li class="nav-item">
+            <router-link to="/users" class="nav-link">Users</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/clients" class="nav-link">Clients</router-link>
+          </li>
+        </template>
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item" v-if="!isAuthorized">
