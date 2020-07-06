@@ -50,13 +50,16 @@
         return `dropdown-menu ${show}`;
       });
 
+      const userData = computed(() => store.state.auth.userData);
+      const isAuthorized = computed(() => store.getters[GETTER_IS_AUTHORIZED]);
+
       const toggleDropdown = () => {
         showDropdown.value = !showDropdown.value;
       };
 
       return {
-        userData: store.state.auth.userData,
-        isAuthorized: store.getters[GETTER_IS_AUTHORIZED],
+        userData,
+        isAuthorized,
         showDropdown,
         toggleDropdown,
         dropdownClasses
