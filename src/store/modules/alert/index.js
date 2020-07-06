@@ -13,7 +13,7 @@ const mutations = {
     storeState.details = {
       show: true,
       message,
-      type: 'error'
+      type: 'danger'
     };
   },
   showSuccessAlert(storeState, message) {
