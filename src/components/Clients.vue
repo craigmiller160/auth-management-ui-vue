@@ -25,7 +25,7 @@
   import Header from '@/components/ui/Header';
   import { getClients } from '@/service/BasicService';
   import { useStore } from 'vuex';
-  import { SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
+  import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
 
   export default {
     name: 'Clients',
@@ -42,7 +42,7 @@
           state.data = clientData.clients;
         } catch (ex) {
           console.log(ex);
-          store.commit(SHOW_ERROR_ALERT, `Error loading clients: ${ex.message}`);
+          store.commit(MUTATION_SHOW_ERROR_ALERT, `Error loading clients: ${ex.message}`);
         }
       });
 

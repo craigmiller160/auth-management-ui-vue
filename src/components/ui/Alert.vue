@@ -10,7 +10,7 @@
 <script>
   import { useStore } from 'vuex';
   import { computed } from 'vue';
-  import { HIDE_ALERT } from '@/store/modules/alert/keys';
+  import { MUTATION_HIDE_ALERT } from '@/store/modules/alert/keys';
 
   export default {
     name: 'Alert',
@@ -25,7 +25,7 @@
 
       const message = computed(() => store.state.alert.details.message);
 
-      const close = () => store.commit(HIDE_ALERT);
+      const close = () => store.commit(MUTATION_HIDE_ALERT);
 
       return {
         alertClasses,

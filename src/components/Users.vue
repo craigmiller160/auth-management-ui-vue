@@ -27,7 +27,7 @@
   import { reactive, onMounted } from 'vue';
   import Header from '@/components/ui/Header';
   import { getUsers } from '@/service/BasicService';
-  import { SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
+  import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
 
   export default {
     name: 'Users',
@@ -44,7 +44,7 @@
           state.data = userData.users;
         } catch (ex) {
           console.log(ex);
-          store.commit(SHOW_ERROR_ALERT, `Error loading users: ${ex.message}`);
+          store.commit(MUTATION_SHOW_ERROR_ALERT, `Error loading users: ${ex.message}`);
         }
       });
 
