@@ -39,8 +39,6 @@
   import { logout } from '@/service/AuthService';
   import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
 
-  // TODO need to implement logout behavior
-
   export default {
     name: 'Navbar',
     setup() {
