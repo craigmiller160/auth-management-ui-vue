@@ -1,7 +1,5 @@
 <template>
-  <div class="container">
-    <Header text="Welcome to OAuth2 Management" />
-  </div>
+  <Header text="Welcome to OAuth2 Management" />
 </template>
 
 <script>

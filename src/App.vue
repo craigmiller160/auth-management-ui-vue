@@ -1,7 +1,9 @@
 <template>
   <Navbar />
-  <Alert />
-  <router-view></router-view>
+  <div class="container">
+    <Alert />
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
