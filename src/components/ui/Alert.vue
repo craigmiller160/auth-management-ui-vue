@@ -1,12 +1,16 @@
 <template>
   <div :class="alertClasses">
     {{ message }}
+    <button type="button" class="close" @click="close">
+      <span>&times;</span>
+    </button>
   </div>
 </template>
 
 <script>
   import { useStore } from 'vuex';
   import { computed } from 'vue';
+  import { HIDE_ALERT } from '@/store/modules/alert/keys';
 
   export default {
     name: 'Alert',
@@ -21,9 +25,12 @@
 
       const message = computed(() => store.state.alert.details.message);
 
+      const close = () => store.commit(HIDE_ALERT);
+
       return {
         alertClasses,
-        message
+        message,
+        close
       };
     }
   };
@@ -32,6 +39,7 @@
 <style lang="scss" scoped>
   .alert {
     display: none;
+    margin: 1rem;
     &.show {
       display: block;
     }
