@@ -24,18 +24,26 @@
   import { reactive, onMounted } from 'vue';
   import Header from '@/components/ui/Header';
   import { getClients } from '@/service/BasicService';
+  import { useStore } from 'vuex';
+  import { SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
 
   export default {
     name: 'Clients',
     components: { Header },
     setup() {
+      const store = useStore();
       const state = reactive({
         data: []
       });
 
       onMounted(async () => {
-        const clientData = await getClients();
-        state.data = clientData.clients;
+        try {
+          const clientData = await getClients();
+          state.data = clientData.clients;
+        } catch (ex) {
+          console.log(ex);
+          store.commit(SHOW_ERROR_ALERT, `Error loading clients: ${ex.message}`);
+        }
       });
 
       return {
