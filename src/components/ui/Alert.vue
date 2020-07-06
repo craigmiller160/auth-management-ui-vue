@@ -14,14 +14,14 @@
       const store = useStore();
 
       const alertClasses = computed(() => {
-        const show = store.alert.details.show ? 'show' : '';
-        const typeClass = `alert-${store.alert.details.type}`;
+        const show = store.state.alert.details.show ? 'show' : '';
+        const typeClass = `alert-${store.state.alert.details.type}`;
         return `alert ${show} ${typeClass}`;
       });
 
       return {
         alertClasses,
-        message: store.alert.details.message
+        message: store.state.alert.details.message
       };
     }
   };

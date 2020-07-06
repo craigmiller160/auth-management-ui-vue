@@ -46,7 +46,7 @@
           state.data = userData.users;
         } catch (ex) {
           console.log(ex);
-          store.dispatch(SHOW_ERROR_ALERT, `Error loading users: ${ex.message}`);
+          store.commit(SHOW_ERROR_ALERT, `Error loading users: ${ex.message}`);
         }
       });
 
