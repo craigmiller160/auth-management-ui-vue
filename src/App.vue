@@ -1,14 +1,16 @@
 <template>
   <Navbar />
+  <Alert />
   <router-view></router-view>
 </template>
 
 <script>
   import Navbar from '@/components/Navbar';
+  import Alert from '@/components/ui/Alert';
 
   export default {
     name: 'App',
-    components: { Navbar }
+    components: { Alert, Navbar }
   };
 </script>
 
