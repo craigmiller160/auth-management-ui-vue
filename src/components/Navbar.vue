@@ -38,10 +38,12 @@
   import { GETTER_IS_AUTHORIZED, MUTATION_SET_USER_DATA } from '@/store/modules/auth/keys';
   import { logout } from '@/service/AuthService';
   import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
+  import { useRouter } from 'vue-router';
 
   export default {
     name: 'Navbar',
     setup() {
+      const router = useRouter();
       const store = useStore();
       const showDropdown = ref(false);
 
@@ -61,6 +63,7 @@
         try {
           await logout();
           store.commit(MUTATION_SET_USER_DATA, null);
+          router.push('/');
         } catch (ex) {
           console.log(ex);
           store.commit(MUTATION_SHOW_ERROR_ALERT, `Error logging out: ${ex.message}`);
