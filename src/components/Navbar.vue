@@ -17,7 +17,7 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item" v-if="!isAuthorized">
-          <a href="/api/authcode/login" class="nav-link">Login</a>
+          <a href="/api/oauth/authcode/login" class="nav-link">Login</a>
         </li>
         <li class="nav-item dropdown" v-if="isAuthorized">
           <a @click="toggleDropdown" class="nav-link dropdown-toggle">
