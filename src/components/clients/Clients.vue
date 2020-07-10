@@ -2,7 +2,7 @@
   <Header text="Clients" />
   <div class="row">
     <div class="col">
-      <table class="table">
+      <table class="table table-striped table-hover">
         <thead>
         <tr>
           <th>Name</th>
@@ -54,5 +54,7 @@
 </script>
 
 <style scoped>
-
+  tr {
+    cursor: pointer;
+  }
 </style>
