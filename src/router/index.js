@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/components/Home';
 import Users from '@/components/Users';
-import Clients from '@/components/Clients';
+import Clients from '@/components/clients/Clients';
 import { isAuthorizedGuard } from '@/router/guards';
 
 const routes = [
