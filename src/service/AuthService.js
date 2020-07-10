@@ -1,9 +1,8 @@
-/* eslint-disable import/prefer-default-export */
 import api from './api';
 
-export const logout = () => api.get('/oauth/authcode/logout');
+export const logout = () => api.get('/oauth/logout');
 
 export const getAuthUser = async () => {
-  const res = await api.get('/oauth/auth');
+  const res = await api.get('/oauth/user');
   return res.data;
 };
