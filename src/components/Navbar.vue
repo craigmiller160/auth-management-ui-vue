@@ -8,6 +8,7 @@
       <ul class="navbar-nav mr-auto">
         <template v-if="isAuthorized">
           <li class="nav-item">
+            <!-- TODO need to find a way to make these show active -->
             <router-link to="/users" class="nav-link">Users</router-link>
           </li>
           <li class="nav-item">

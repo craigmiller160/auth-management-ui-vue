@@ -10,10 +10,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="client in state.data" :key="client.key">
-          <td>{{ client.name }}</td>
-          <td>{{ client.clientKey }}</td>
-        </tr>
+          <tr
+            v-for="client in state.data"
+            :key="client.key"
+            @click="clientClick(client.id)"
+          >
+            <td>{{ client.name }}</td>
+            <td>{{ client.clientKey }}</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -26,11 +30,13 @@
   import { getClients } from '@/service/BasicService';
   import { useStore } from 'vuex';
   import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
+  import { useRouter } from 'vue-router';
 
   export default {
     name: 'Clients',
     components: { Header },
     setup() {
+      const router = useRouter();
       const store = useStore();
       const state = reactive({
         data: []
@@ -46,14 +52,17 @@
         }
       });
 
+      const clientClick = (id) => router.push(`/clients/${id}`);
+
       return {
-        state
+        state,
+        clientClick
       };
     }
   };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   tr {
     cursor: pointer;
   }

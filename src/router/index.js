@@ -3,6 +3,7 @@ import Home from '@/components/Home';
 import Users from '@/components/Users';
 import Clients from '@/components/clients/Clients';
 import { isAuthorizedGuard } from '@/router/guards';
+import ClientDetails from '@/components/clients/ClientDetails';
 
 const routes = [
   {
@@ -20,6 +21,12 @@ const routes = [
     path: '/clients',
     name: 'Clients',
     component: Clients,
+    beforeEnter: isAuthorizedGuard
+  },
+  {
+    path: '/clients/:id',
+    name: 'ClientDetails',
+    component: ClientDetails,
     beforeEnter: isAuthorizedGuard
   }
 ];
