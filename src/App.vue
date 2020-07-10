@@ -11,7 +11,7 @@
   import Alert from '@/components/ui/Alert';
   import { onMounted } from 'vue';
   import { useStore } from 'vuex';
-  import { getAuthUser } from '@/service/BasicService';
+  import { getAuthUser } from '@/service/AuthService';
   import { MUTATION_SET_USER_DATA } from '@/store/modules/auth/keys';
   import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
 

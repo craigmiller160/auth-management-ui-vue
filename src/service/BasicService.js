@@ -9,8 +9,3 @@ export const getClients = async () => {
   const res = await api.get('/basic/clients');
   return res.data;
 };
-
-export const getAuthUser = async () => {
-  const res = await api.get('/basic/auth');
-  return res.data;
-};
