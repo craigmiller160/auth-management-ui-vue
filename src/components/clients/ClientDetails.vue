@@ -5,9 +5,9 @@
       <TextField
         name="client-name"
         label="Client Name"
-        :value="state.client.name"
-        @input="value => state.client.name = value"
+        v-model="state.client.name"
       />
+      <p>{{ state.client.name }}</p>
     </div>
   </div>
   <div class="row">

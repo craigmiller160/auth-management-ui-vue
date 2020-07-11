@@ -5,7 +5,7 @@
       :id="id"
       :name="name"
       class="form-control"
-      :value="value"
+      :value="modelValue"
       @input="inputChange"
       :type="type"
     />
@@ -26,7 +26,7 @@
         type: String,
         required: true
       },
-      value: {
+      modelValue: {
         type: String,
         required: true
       },
@@ -40,7 +40,7 @@
 
       const inputChange = (event) => {
         event.stopPropagation();
-        emit('input', event.target.value);
+        emit('update:modelValue', event.target.value);
       };
 
       return {
