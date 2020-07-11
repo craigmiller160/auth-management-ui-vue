@@ -154,6 +154,10 @@
 
   .form-section {
     margin-top: 2rem;
+
+    h3 {
+      text-align: center;
+    }
   }
 
   .action-btn-container {
