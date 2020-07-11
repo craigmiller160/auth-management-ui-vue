@@ -9,61 +9,84 @@
       />
     </div>
   </div>
-  <div class="row">
-    <div class="col-4">
-      <TextField
-        name="client-key"
-        label="Client Key"
-        v-model="state.client.clientKey"
-        :disabled="true"
-      />
-    </div>
-    <div class="col-2 gen-btn">
-      <button class="btn btn-info" @click="generateClientKey">Generate</button>
-    </div>
-    <div class="col-4">
-      <!-- TODO need placeholder value once I suppress the server-side value -->
-      <!-- TODO do I really want this hidden? The user does need to see this at some point -->
-      <TextField
-        name="client-secret"
-        label="Client Secret"
-        type="password"
-        v-model="state.client.clientSecret"
-        :disabled="true"
-      />
-    </div>
-    <div class="col-2 gen-btn">
-      <button class="btn btn-info" @click="generateClientSecret">Generate</button>
+  <div class="form-section">
+    <h3>Keys</h3>
+    <hr />
+    <div class="row">
+      <div class="col-4">
+        <TextField
+          name="client-key"
+          label="Client Key"
+          v-model="state.client.clientKey"
+          :disabled="true"
+        />
+      </div>
+      <div class="col-2 gen-btn">
+        <button class="btn btn-info" @click="generateClientKey">Generate</button>
+      </div>
+      <div class="col-4">
+        <!-- TODO need placeholder value once I suppress the server-side value -->
+        <!-- TODO do I really want this hidden? The user does need to see this at some point -->
+        <TextField
+          name="client-secret"
+          label="Client Secret"
+          type="password"
+          v-model="state.client.clientSecret"
+          :disabled="true"
+        />
+      </div>
+      <div class="col-2 gen-btn">
+        <button class="btn btn-info" @click="generateClientSecret">Generate</button>
+      </div>
     </div>
   </div>
-  <div class="row checkboxes">
-    <div class="col-3">
-      <Checkbox
-        name="enabled"
-        label="Enabled"
-        v-model="state.client.enabled"
-      />
+  <div class="form-section">
+    <h3>Grants</h3>
+    <hr />
+    <div class="row">
+      <div class="col-3">
+        <Checkbox
+          name="enabled"
+          label="Enabled"
+          v-model="state.client.enabled"
+        />
+      </div>
+      <div class="col-3">
+        <Checkbox
+          name="client-creds"
+          label="Client Credentials Grant"
+          v-model="state.client.allowClientCredentials"
+        />
+      </div>
+      <div class="col-3">
+        <Checkbox
+          name="password"
+          label="Password Grant"
+          v-model="state.client.allowPassword"
+        />
+      </div>
+      <div class="col-3">
+        <Checkbox
+          name="auth-code"
+          label="Authorization Code Grant"
+          v-model="state.client.allowAuthCode"
+        />
+      </div>
     </div>
-    <div class="col-3">
-      <Checkbox
-        name="client-creds"
-        label="Client Credentials Grant"
-        v-model="state.client.allowClientCredentials"
-      />
-    </div>
-    <div class="col-3">
-      <Checkbox
-        name="password"
-        label="Password Grant"
-        v-model="state.client.allowPassword"
-      />
-    </div>
-    <div class="col-3">
-      <Checkbox
-        name="auth-code"
-        label="Authorization Code Grant"
-        v-model="state.client.allowAuthCode"
-      />
+  </div>
+  <div class="form-section">
+    <h3>Actions</h3>
+    <hr />
+    <div class="row">
+      <div class="col-4 action-btn-container">
+        <button class="btn btn-info">Cancel</button>
+      </div>
+      <div class="col-4 action-btn-container">
+        <button class="btn btn-primary">Save</button>
+      </div>
+      <div class="col-4 action-btn-container">
+        <button class="btn btn-danger">Delete</button>
+      </div>
     </div>
   </div>
 </template>
@@ -129,7 +152,12 @@
     }
   }
 
-  .checkboxes {
+  .form-section {
     margin-top: 2rem;
+  }
+
+  .action-btn-container {
+    display: flex;
+    justify-content: center;
   }
 </style>
