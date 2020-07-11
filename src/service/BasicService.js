@@ -6,6 +6,11 @@ export const getUsers = async () => {
 };
 
 export const getClients = async () => {
-  const res = await api.get('/basic/clients');
+  const res = await api.get('/clients');
+  return res.data;
+};
+
+export const getClient = async (id) => {
+  const res = await api.get(`/clients/${id}`);
   return res.data;
 };
