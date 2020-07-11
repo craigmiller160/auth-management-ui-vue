@@ -4,8 +4,7 @@
       :id="id"
       class="form-check-input"
       type="checkbox"
-      :checked="value"
-      @input="onClick"
+      v-model="value"
     />
     <label :for="id" class="form-check-label">{{ label }}</label>
   </div>
@@ -25,22 +24,21 @@
         type: String,
         required: true
       },
-      value: {
+      modelValue: {
         type: Boolean,
         required: true
       }
     },
     setup(props, { emit }) {
       const id = computed(() => `${props.name}_field`);
-
-      const onClick = (event) => {
-        event.stopPropagation();
-        emit('input', event.target.checked);
-      };
+      const value = computed({
+        get: () => props.modelValue,
+        set: (val) => emit('update:modelValue', val)
+      });
 
       return {
         id,
-        onClick
+        value
       };
     }
   };

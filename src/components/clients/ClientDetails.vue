@@ -38,8 +38,7 @@
       <Checkbox
         name="enabled"
         label="Enabled"
-        :value="state.client.enabled"
-        @input="value => state.client.enabled = value"
+        v-model="state.client.enabled"
       />
     </div>
     <div class="col-3">
