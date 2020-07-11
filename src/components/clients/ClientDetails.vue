@@ -23,6 +23,7 @@
       <button class="btn btn-info">Generate</button>
     </div>
     <div class="col-4">
+      <!-- TODO need placeholder value once I suppress the server-side value -->
       <TextField
         name="client-secret"
         label="Client Secret"
@@ -35,6 +36,24 @@
       <button class="btn btn-info">Generate</button>
     </div>
   </div>
+  <div class="row">
+    <div class="col-3">
+      <Checkbox
+        name="enabled"
+        label="Enabled"
+        :value="state.client.enabled"
+      />
+    </div>
+    <div class="col-3">
+
+    </div>
+    <div class="col-3">
+
+    </div>
+    <div class="col-3">
+
+    </div>
+  </div>
 </template>
 
 <script>
@@ -45,10 +64,11 @@
   import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
   import { useStore } from 'vuex';
   import TextField from '@/components/ui/TextField';
+  import Checkbox from '@/components/ui/Checkbox';
 
   export default {
     name: 'ClientDetails',
-    components: { Header, TextField },
+    components: { Checkbox, Header, TextField },
     setup() {
       const router = useRouter();
       const store = useStore();
