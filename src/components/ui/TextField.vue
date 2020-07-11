@@ -7,6 +7,7 @@
       class="form-control"
       :type="type"
       v-model="value"
+      :disabled="disabled"
     />
   </div>
 </template>
@@ -25,12 +26,14 @@
         type: String,
         required: true
       },
-      modelValue: {
-        type: String
-      },
+      modelValue: String,
       type: {
         type: String,
         default: 'text'
+      },
+      disabled: {
+        type: Boolean,
+        default: false
       }
     },
     setup(props, { emit }) {

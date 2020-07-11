@@ -15,10 +15,11 @@
         name="client-key"
         label="Client Key"
         v-model="state.client.clientKey"
+        :disabled="true"
       />
     </div>
     <div class="col-2 gen-btn">
-      <button class="btn btn-info">Generate</button>
+      <button class="btn btn-info" @click="generateClientKey">Generate</button>
     </div>
     <div class="col-4">
       <!-- TODO need placeholder value once I suppress the server-side value -->
@@ -27,10 +28,11 @@
         label="Client Secret"
         type="password"
         v-model="state.client.clientSecret"
+        :disabled="true"
       />
     </div>
     <div class="col-2 gen-btn">
-      <button class="btn btn-info">Generate</button>
+      <button class="btn btn-info" @click="generateClientSecret">Generate</button>
     </div>
   </div>
   <div class="row checkboxes">
@@ -69,7 +71,7 @@
   import Header from '@/components/ui/Header';
   import { onMounted, onUpdated, reactive } from 'vue';
   import { useRouter } from 'vue-router';
-  import { getClient } from '@/service/ClientService';
+  import { generateGuid, getClient } from '@/service/ClientService';
   import TextField from '@/components/ui/TextField';
   import Checkbox from '@/components/ui/Checkbox';
 
@@ -92,8 +94,24 @@
         console.log(state.client); // TODO delete this
       });
 
+      const generateClientKey = async () => {
+        const guid = await generateGuid();
+        if (guid) {
+          state.client.clientKey = guid;
+        }
+      };
+
+      const generateClientSecret = async () => {
+        const guid = await generateGuid();
+        if (guid) {
+          state.client.clientSecret = guid;
+        }
+      };
+
       return {
-        state
+        state,
+        generateClientKey,
+        generateClientSecret
       };
     }
   };

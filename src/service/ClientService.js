@@ -23,3 +23,14 @@ export const getClient = async (id) => {
     return undefined;
   }
 };
+
+export const generateGuid = async () => {
+  try {
+    const res = await api.get('/clients/guid');
+    return res.data;
+  } catch (ex) {
+    console.log(ex);
+    store.commit(MUTATION_SHOW_ERROR_ALERT, `Error generating GUID: ${ex.message}`);
+    return undefined;
+  }
+};
