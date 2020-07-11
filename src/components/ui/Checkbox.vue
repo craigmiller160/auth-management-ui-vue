@@ -4,7 +4,7 @@
       :id="id"
       class="form-check-input"
       type="checkbox"
-      :value="value"
+      :checked="value"
     />
     <label :for="id" class="form-check-label">{{ label }}</label>
   </div>
