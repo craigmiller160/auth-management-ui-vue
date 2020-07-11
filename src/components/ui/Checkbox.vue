@@ -25,8 +25,7 @@
         required: true
       },
       modelValue: {
-        type: Boolean,
-        required: true
+        type: Boolean
       }
     },
     setup(props, { emit }) {

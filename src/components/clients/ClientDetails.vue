@@ -45,24 +45,21 @@
       <Checkbox
         name="client-creds"
         label="Client Credentials Grant"
-        :value="state.client.allowClientCredentials"
-        @input="value => state.client.allowClientCredentials = value"
+        v-model="state.client.allowClientCredentials"
       />
     </div>
     <div class="col-3">
       <Checkbox
         name="password"
         label="Password Grant"
-        :value="state.client.allowPassword"
-        @input="value => state.client.allowPassword = value"
+        v-model="state.client.allowPassword"
       />
     </div>
     <div class="col-3">
       <Checkbox
         name="auth-code"
         label="Authorization Code Grant"
-        :value="state.client.allowAuthCode"
-        @input="value => state.client.allowAuthCode = value"
+        v-model="state.client.allowAuthCode"
       />
     </div>
   </div>
