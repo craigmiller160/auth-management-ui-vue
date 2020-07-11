@@ -1,7 +1,14 @@
 <template>
   <div class="form-group">
     <label :for="id">{{ label }}</label>
-    <input :id="id" :name="name" class="form-control" :value="value" @input="inputChange" />
+    <input
+      :id="id"
+      :name="name"
+      class="form-control"
+      :value="value"
+      @input="inputChange"
+      :type="type"
+    />
   </div>
 </template>
 
@@ -11,9 +18,22 @@
   export default {
     name: 'Input',
     props: {
-      label: String,
-      name: String,
-      value: String
+      label: {
+        type: String,
+        required: true
+      },
+      name: {
+        type: String,
+        required: true
+      },
+      value: {
+        type: String,
+        required: true
+      },
+      type: {
+        type: String,
+        default: 'text'
+      }
     },
     setup(props, { emit }) {
       const id = computed(() => `${props.name}_field`);
@@ -31,6 +51,8 @@
   };
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  label {
+    font-weight: bold;
+  }
 </style>

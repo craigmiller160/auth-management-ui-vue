@@ -1,13 +1,32 @@
 <template>
   <Header text="Client Details" />
   <div class="row">
-    <div class="col">
+    <div class="col-4 offset-4">
       <TextField
         name="client-name"
         label="Client Name"
-        v-model="state.client.name"
-      ></TextField>
-      <p>{{ state.client.name }}</p>
+        :value="state.client.name"
+        @input="value => state.client.name = value"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <TextField
+        name="client-key"
+        label="Client Key"
+        :value="state.client.clientKey"
+        @input="value => state.client.clientKey = value"
+      />
+    </div>
+    <div class="col-4">
+      <TextField
+        name="client-secret"
+        label="Client Secret"
+        type="password"
+        :value="state.client.clientSecret"
+        @input="value => state.client.clientSecret = value"
+      />
     </div>
   </div>
 </template>
