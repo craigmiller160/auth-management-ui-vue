@@ -36,7 +36,7 @@
       <button class="btn btn-info">Generate</button>
     </div>
   </div>
-  <div class="row">
+  <div class="row checkboxes">
     <div class="col-3">
       <Checkbox
         name="enabled"
@@ -118,5 +118,9 @@
     button {
       margin-bottom: 1rem;
     }
+  }
+
+  .checkboxes {
+    margin-top: 2rem;
   }
 </style>
