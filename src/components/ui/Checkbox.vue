@@ -5,6 +5,7 @@
       class="form-check-input"
       type="checkbox"
       :checked="value"
+      @input="onClick"
     />
     <label :for="id" class="form-check-label">{{ label }}</label>
   </div>
@@ -32,12 +33,13 @@
     setup(props, { emit }) {
       const id = computed(() => `${props.name}_field`);
 
-      setInterval(() => {
-        console.log(props.value); // TODO delete this
-      }, 1000);
+      const onClick = (event) => {
+        emit('input', event.target.checked);
+      };
 
       return {
-        id
+        id,
+        onClick
       };
     }
   };

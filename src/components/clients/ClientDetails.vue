@@ -42,6 +42,7 @@
         name="enabled"
         label="Enabled"
         :value="state.client.enabled"
+        @input="value => state.client.enabled = value"
       />
     </div>
     <div class="col-3">
@@ -49,6 +50,7 @@
         name="client-creds"
         label="Client Credentials Grant"
         :value="state.client.allowClientCredentials"
+        @input="value => state.client.allowClientCredentials = value"
       />
     </div>
     <div class="col-3">
@@ -56,6 +58,7 @@
         name="password"
         label="Password Grant"
         :value="state.client.allowPassword"
+        @input="value => state.client.allowPassword = value"
       />
     </div>
     <div class="col-3">
@@ -63,6 +66,7 @@
         name="auth-code"
         label="Authorization Code Grant"
         :value="state.client.allowAuthCode"
+        @input="value => state.client.allowAuthCode = value"
       />
     </div>
   </div>
