@@ -45,13 +45,25 @@
       />
     </div>
     <div class="col-3">
-
+      <Checkbox
+        name="client-creds"
+        label="Client Credentials Grant"
+        :value="state.client.allowClientCredentials"
+      />
     </div>
     <div class="col-3">
-
+      <Checkbox
+        name="password"
+        label="Password Grant"
+        :value="state.client.allowPassword"
+      />
     </div>
     <div class="col-3">
-
+      <Checkbox
+        name="auth-code"
+        label="Authorization Code Grant"
+        :value="state.client.allowAuthCode"
+      />
     </div>
   </div>
 </template>
