@@ -19,6 +19,9 @@
         @input="value => state.client.clientKey = value"
       />
     </div>
+    <div class="col-2 gen-btn">
+      <button class="btn btn-info">Generate</button>
+    </div>
     <div class="col-4">
       <TextField
         name="client-secret"
@@ -27,6 +30,9 @@
         :value="state.client.clientSecret"
         @input="value => state.client.clientSecret = value"
       />
+    </div>
+    <div class="col-2 gen-btn">
+      <button class="btn btn-info">Generate</button>
     </div>
   </div>
 </template>
@@ -67,6 +73,14 @@
   };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  .gen-btn {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
 
+    button {
+      margin-bottom: 1rem;
+    }
+  }
 </style>
