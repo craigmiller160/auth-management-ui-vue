@@ -67,11 +67,9 @@
 
 <script>
   import Header from '@/components/ui/Header';
-  import { onMounted, reactive, onUpdated } from 'vue';
+  import { onMounted, onUpdated, reactive } from 'vue';
   import { useRouter } from 'vue-router';
-  import { getClient } from '@/service/BasicService';
-  import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
-  import { useStore } from 'vuex';
+  import { getClient } from '@/service/ClientService';
   import TextField from '@/components/ui/TextField';
   import Checkbox from '@/components/ui/Checkbox';
 
@@ -80,19 +78,14 @@
     components: { Checkbox, Header, TextField },
     setup() {
       const router = useRouter();
-      const store = useStore();
       const state = reactive({
         client: {}
       });
 
       onMounted(async () => {
         const { id } = router.currentRoute.value.params;
-        try {
-          state.client = await getClient(id);
-        } catch (ex) {
-          console.log(ex);
-          store.commit(MUTATION_SHOW_ERROR_ALERT, `Error loading client details: ${ex.message}`);
-        }
+        const data = await getClient(id);
+        state.client = data ?? {};
       });
 
       onUpdated(() => {

@@ -25,11 +25,9 @@
 </template>
 
 <script>
-  import { reactive, onMounted } from 'vue';
+  import { onMounted, reactive } from 'vue';
   import Header from '@/components/ui/Header';
-  import { getClients } from '@/service/BasicService';
-  import { useStore } from 'vuex';
-  import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
+  import { getClients } from '@/service/ClientService';
   import { useRouter } from 'vue-router';
 
   export default {
@@ -37,19 +35,13 @@
     components: { Header },
     setup() {
       const router = useRouter();
-      const store = useStore();
       const state = reactive({
         data: []
       });
 
       onMounted(async () => {
-        try {
-          const clientData = await getClients();
-          state.data = clientData.clients;
-        } catch (ex) {
-          console.log(ex);
-          store.commit(MUTATION_SHOW_ERROR_ALERT, `Error loading clients: ${ex.message}`);
-        }
+        const clientData = await getClients();
+        state.data = clientData?.clients ?? [];
       });
 
       const clientClick = (id) => router.push(`/clients/${id}`);
