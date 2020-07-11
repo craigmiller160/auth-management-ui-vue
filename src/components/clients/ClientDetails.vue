@@ -41,14 +41,8 @@
         }
       });
 
-      const nameChange = (value) => { // TODO delete this once v-model works
-        console.log('Log2', value); // TODO delete this
-        state.client.name = value;
-      };
-
       return {
-        state,
-        nameChange
+        state
       };
     }
   };
