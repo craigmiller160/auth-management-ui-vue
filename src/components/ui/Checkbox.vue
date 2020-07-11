@@ -34,6 +34,7 @@
       const id = computed(() => `${props.name}_field`);
 
       const onClick = (event) => {
+        event.stopPropagation();
         emit('input', event.target.checked);
       };
 

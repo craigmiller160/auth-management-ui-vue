@@ -71,7 +71,7 @@
 
 <script>
   import Header from '@/components/ui/Header';
-  import { onMounted, reactive } from 'vue';
+  import { onMounted, reactive, onUpdated } from 'vue';
   import { useRouter } from 'vue-router';
   import { getClient } from '@/service/BasicService';
   import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
@@ -97,6 +97,10 @@
           console.log(ex);
           store.commit(MUTATION_SHOW_ERROR_ALERT, `Error loading client details: ${ex.message}`);
         }
+      });
+
+      onUpdated(() => {
+        console.log(state.client); // TODO delete this
       });
 
       return {
