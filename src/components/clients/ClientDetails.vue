@@ -23,6 +23,7 @@
     </div>
     <div class="col-4">
       <!-- TODO need placeholder value once I suppress the server-side value -->
+      <!-- TODO do I really want this hidden? The user does need to see this at some point -->
       <TextField
         name="client-secret"
         label="Client Secret"
