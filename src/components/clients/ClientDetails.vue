@@ -7,7 +7,6 @@
         label="Client Name"
         v-model="state.client.name"
       />
-      <p>{{ state.client.name }}</p>
     </div>
   </div>
   <div class="row">
@@ -15,8 +14,7 @@
       <TextField
         name="client-key"
         label="Client Key"
-        :value="state.client.clientKey"
-        @input="value => state.client.clientKey = value"
+        v-model="state.client.clientKey"
       />
     </div>
     <div class="col-2 gen-btn">
@@ -28,8 +26,7 @@
         name="client-secret"
         label="Client Secret"
         type="password"
-        :value="state.client.clientSecret"
-        @input="value => state.client.clientSecret = value"
+        v-model="state.client.clientSecret"
       />
     </div>
     <div class="col-2 gen-btn">

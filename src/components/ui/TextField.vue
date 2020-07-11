@@ -5,9 +5,8 @@
       :id="id"
       :name="name"
       class="form-control"
-      :value="modelValue"
-      @input="inputChange"
       :type="type"
+      v-model="value"
     />
   </div>
 </template>
@@ -27,8 +26,7 @@
         required: true
       },
       modelValue: {
-        type: String,
-        required: true
+        type: String
       },
       type: {
         type: String,
@@ -37,15 +35,14 @@
     },
     setup(props, { emit }) {
       const id = computed(() => `${props.name}_field`);
-
-      const inputChange = (event) => {
-        event.stopPropagation();
-        emit('update:modelValue', event.target.value);
-      };
+      const value = computed({
+        get: () => props.modelValue,
+        set: (val) => emit('update:modelValue', val)
+      });
 
       return {
         id,
-        inputChange
+        value
       };
     }
   };
