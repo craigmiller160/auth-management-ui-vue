@@ -121,7 +121,7 @@
 <script>
   import Header from '@/components/ui/Header';
   import {
-    onMounted, onUpdated, reactive, computed
+    onMounted, reactive, computed
   } from 'vue';
   import { useRouter } from 'vue-router';
   import { generateGuid, getClient } from '@/service/ClientService';
@@ -144,10 +144,6 @@
         const { id } = router.currentRoute.value.params;
         const data = await getClient(id);
         state.client = data ?? {};
-      });
-
-      onUpdated(() => {
-        console.log(state.client); // TODO delete this
       });
 
       const generateClientKey = async () => {
