@@ -28,18 +28,17 @@
         </div>
       </div>
       <div class="col-6">
-        <!-- TODO do I really want this hidden? The user does need to see this at some point -->
         <div class="row">
           <TextField
             name="client-secret"
             label="Client Secret"
-            type="password"
+            type="text"
             v-model="state.client.clientSecret"
             :disabled="true"
             class="grow"
           />
           <div class="key-actions">
-            <button class="btn btn-info">{{ secretBtnLabel }}</button>
+            <button class="btn btn-info" @click="toggleClientSecret">{{ secretBtnLabel }}</button>
             <button class="btn btn-warning" @click="generateClientSecret">Generate</button>
           </div>
         </div>
@@ -165,11 +164,16 @@
         }
       };
 
+      const toggleClientSecret = () => {
+        state.showSecret = !state.showSecret;
+      };
+
       return {
         state,
         generateClientKey,
         generateClientSecret,
-        secretBtnLabel
+        secretBtnLabel,
+        toggleClientSecret
       };
     }
   };
