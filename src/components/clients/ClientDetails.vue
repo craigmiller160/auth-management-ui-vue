@@ -87,7 +87,7 @@
         <TextField
           name="access-token-timeout"
           label="Access Token Timeout (Secs)"
-          type="text"
+          type="number"
           v-model="state.client.accessTokenTimeoutSecs"
         />
       </div>
@@ -95,7 +95,7 @@
         <TextField
           name="refresh-token-timeout"
           label="Refresh Token Timeout (Secs)"
-          type="text"
+          type="number"
           v-model="state.client.refreshTokenTimeoutSecs"
         />
       </div>
@@ -106,12 +106,14 @@
     <hr />
     <div class="row">
       <div class="col-4 action-btn-container">
+        <!-- TODO include warning about unsaved changes, if there are any -->
         <button class="btn btn-info">Cancel</button>
       </div>
       <div class="col-4 action-btn-container">
-        <button class="btn btn-primary">Save</button>
+        <button class="btn btn-primary" :disabled="disableSave">Save</button>
       </div>
       <div class="col-4 action-btn-container">
+        <!-- TODO include warning before delete -->
         <button class="btn btn-danger">Delete</button>
       </div>
     </div>
@@ -121,8 +123,9 @@
 <script>
   import Header from '@/components/ui/Header';
   import {
-    onMounted, reactive
+    onMounted, reactive, computed
   } from 'vue';
+  import { isEqual } from 'lodash-es';
   import { useRouter } from 'vue-router';
   import { generateGuid, getClient } from '@/service/ClientService';
   import TextField from '@/components/ui/TextField';
@@ -134,13 +137,16 @@
     setup() {
       const router = useRouter();
       const state = reactive({
-        client: {}
+        client: {},
+        oldClient: {}
       });
+      const disableSave = computed(() => isEqual(state.oldClient, state.client));
 
       onMounted(async () => {
         const { id } = router.currentRoute.value.params;
-        const client = await getClient(id);
-        state.client = client ?? {};
+        const client = (await getClient(id)) ?? {};
+        state.client = { ...client };
+        state.oldClient = client;
       });
 
       const generateClientKey = async () => {
@@ -160,7 +166,8 @@
       return {
         state,
         generateClientKey,
-        generateClientSecret
+        generateClientSecret,
+        disableSave
       };
     }
   };
