@@ -32,7 +32,7 @@
           <TextField
             name="client-secret"
             label="Client Secret"
-            type="text"
+            :type="state.showSecret ? 'text' : 'password'"
             v-model="state.client.clientSecret"
             :disabled="true"
             class="grow"
@@ -124,7 +124,7 @@
     onMounted, reactive, computed
   } from 'vue';
   import { useRouter } from 'vue-router';
-  import { generateGuid, getClient } from '@/service/ClientService';
+  import { generateGuid, getClient, getClientSecret } from '@/service/ClientService';
   import TextField from '@/components/ui/TextField';
   import Checkbox from '@/components/ui/Checkbox';
 
@@ -142,8 +142,10 @@
 
       onMounted(async () => {
         const { id } = router.currentRoute.value.params;
-        const data = await getClient(id);
-        state.client = data ?? {};
+        const client = await getClient(id);
+        const secret = await getClientSecret(id);
+        state.client = client ?? {};
+        state.client.clientSecret = secret ?? undefined;
       });
 
       const generateClientKey = async () => {
