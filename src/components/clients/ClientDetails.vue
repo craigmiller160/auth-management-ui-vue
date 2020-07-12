@@ -13,30 +13,36 @@
     <h3>Keys</h3>
     <hr />
     <div class="row">
-      <div class="col-4">
-        <TextField
-          name="client-key"
-          label="Client Key"
-          v-model="state.client.clientKey"
-          :disabled="true"
-        />
+      <div class="col-6">
+        <div class="row">
+          <TextField
+            name="client-key"
+            label="Client Key"
+            v-model="state.client.clientKey"
+            :disabled="true"
+            class="grow"
+          />
+          <div class="key-actions">
+            <button class="btn btn-warning" @click="generateClientKey">Generate</button>
+          </div>
+        </div>
       </div>
-      <div class="col-2 gen-btn">
-        <button class="btn btn-info" @click="generateClientKey">Generate</button>
-      </div>
-      <div class="col-4">
-        <!-- TODO need placeholder value once I suppress the server-side value -->
+      <div class="col-6">
         <!-- TODO do I really want this hidden? The user does need to see this at some point -->
-        <TextField
-          name="client-secret"
-          label="Client Secret"
-          type="password"
-          v-model="state.client.clientSecret"
-          :disabled="true"
-        />
-      </div>
-      <div class="col-2 gen-btn">
-        <button class="btn btn-info" @click="generateClientSecret">Generate</button>
+        <div class="row">
+          <TextField
+            name="client-secret"
+            label="Client Secret"
+            type="password"
+            v-model="state.client.clientSecret"
+            :disabled="true"
+            class="grow"
+          />
+          <div class="key-actions">
+            <button class="btn btn-info">{{ secretBtnLabel }}</button>
+            <button class="btn btn-warning" @click="generateClientSecret">Generate</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -93,7 +99,9 @@
 
 <script>
   import Header from '@/components/ui/Header';
-  import { onMounted, onUpdated, reactive } from 'vue';
+  import {
+    onMounted, onUpdated, reactive, computed
+  } from 'vue';
   import { useRouter } from 'vue-router';
   import { generateGuid, getClient } from '@/service/ClientService';
   import TextField from '@/components/ui/TextField';
@@ -105,8 +113,11 @@
     setup() {
       const router = useRouter();
       const state = reactive({
-        client: {}
+        client: {},
+        showSecret: false
       });
+
+      const secretBtnLabel = computed(() => (state.showSecret ? 'Hide' : 'Show'));
 
       onMounted(async () => {
         const { id } = router.currentRoute.value.params;
@@ -135,14 +146,29 @@
       return {
         state,
         generateClientKey,
-        generateClientSecret
+        generateClientSecret,
+        secretBtnLabel
       };
     }
   };
 </script>
 
 <style scoped lang="scss">
-  .gen-btn {
+  .gen-btn { // TODO delete this
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    button {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .grow {
+    width: 60%;
+  }
+
+  .key-actions {
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
