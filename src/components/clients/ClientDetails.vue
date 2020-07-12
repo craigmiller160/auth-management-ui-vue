@@ -81,6 +81,28 @@
     </div>
   </div>
   <div class="form-section">
+    <h3>Timeouts</h3>
+    <hr />
+    <div class="row">
+      <div class="col-4">
+        <TextField
+          name="access-token-timeout"
+          label="Access Token Timeout (Secs)"
+          type="text"
+          v-model="state.client.accessTokenTimeoutSecs"
+        />
+      </div>
+      <div class="col-4 offset-2">
+        <TextField
+          name="refresh-token-timeout"
+          label="Refresh Token Timeout (Secs)"
+          type="text"
+          v-model="state.client.refreshTokenTimeoutSecs"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="form-section">
     <h3>Actions</h3>
     <hr />
     <div class="row">
