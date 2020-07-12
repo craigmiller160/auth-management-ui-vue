@@ -32,13 +32,13 @@
           <TextField
             name="client-secret"
             label="Client Secret"
-            :type="state.showSecret ? 'text' : 'password'"
+            type="text"
             v-model="state.client.clientSecret"
             :disabled="true"
             class="grow"
           />
           <div class="key-actions">
-            <button class="btn btn-info" @click="toggleClientSecret">{{ secretBtnLabel }}</button>
+            <!-- TODO include a warning before saving to store the secret in a safe place -->
             <button class="btn btn-warning" @click="generateClientSecret">Generate</button>
           </div>
         </div>
@@ -121,10 +121,10 @@
 <script>
   import Header from '@/components/ui/Header';
   import {
-    onMounted, reactive, computed
+    onMounted, reactive
   } from 'vue';
   import { useRouter } from 'vue-router';
-  import { generateGuid, getClient, getClientSecret } from '@/service/ClientService';
+  import { generateGuid, getClient } from '@/service/ClientService';
   import TextField from '@/components/ui/TextField';
   import Checkbox from '@/components/ui/Checkbox';
 
@@ -134,18 +134,13 @@
     setup() {
       const router = useRouter();
       const state = reactive({
-        client: {},
-        showSecret: false
+        client: {}
       });
-
-      const secretBtnLabel = computed(() => (state.showSecret ? 'Hide' : 'Show'));
 
       onMounted(async () => {
         const { id } = router.currentRoute.value.params;
         const client = await getClient(id);
-        const secret = await getClientSecret(id);
         state.client = client ?? {};
-        state.client.clientSecret = secret ?? undefined;
       });
 
       const generateClientKey = async () => {
@@ -162,32 +157,16 @@
         }
       };
 
-      const toggleClientSecret = () => {
-        state.showSecret = !state.showSecret;
-      };
-
       return {
         state,
         generateClientKey,
-        generateClientSecret,
-        secretBtnLabel,
-        toggleClientSecret
+        generateClientSecret
       };
     }
   };
 </script>
 
 <style scoped lang="scss">
-  .gen-btn { // TODO delete this
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-
-    button {
-      margin-bottom: 1rem;
-    }
-  }
-
   .grow {
     width: 60%;
   }

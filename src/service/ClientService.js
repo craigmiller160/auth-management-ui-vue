@@ -24,17 +24,6 @@ export const getClient = async (id) => {
   }
 };
 
-export const getClientSecret = async (id) => {
-  try {
-    const res = await api.get(`/clients/${id}/secret`);
-    return res.data;
-  } catch (ex) {
-    console.log(ex);
-    store.commit(MUTATION_SHOW_ERROR_ALERT, `Error loading secret for client ${id}: ${ex.message}`);
-    return undefined;
-  }
-};
-
 export const generateGuid = async () => {
   try {
     const res = await api.get('/clients/guid');
