@@ -7,11 +7,11 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <template v-if="isAuthorized">
-          <li class="nav-item">
+          <li :class="navLinkClasses('/users')">
             <!-- TODO need to find a way to make these show active -->
             <router-link to="/users" class="nav-link">Users</router-link>
           </li>
-          <li class="nav-item">
+          <li :class="navLinkClasses('/clients')">
             <router-link to="/clients" class="nav-link">Clients</router-link>
           </li>
         </template>
@@ -55,6 +55,11 @@
 
       const userData = computed(() => store.state.auth.userData);
       const isAuthorized = computed(() => store.getters[GETTER_IS_AUTHORIZED]);
+      const navLinkClasses = (route) => {
+        const isActive = router.currentRoute.value.path.startsWith(route);
+        const activeClass = isActive ? 'active' : '';
+        return `nav-item ${activeClass}`;
+      };
 
       const toggleDropdown = () => {
         showDropdown.value = !showDropdown.value;
@@ -77,7 +82,8 @@
         showDropdown,
         toggleDropdown,
         dropdownClasses,
-        doLogout
+        doLogout,
+        navLinkClasses
       };
     }
   };
@@ -94,11 +100,20 @@
         margin-right: 1rem;
       }
 
-      .nav-link {
-        color: $white;
+      .nav-item {
+        &.active {
+          border-bottom: 2px solid $white;
+        }
+        &:not(.active) {
+          margin-bottom: 2px;
+        }
 
-        &.dropdown-toggle {
-          cursor: pointer;
+        .nav-link {
+          color: $white;
+
+          &.dropdown-toggle {
+            cursor: pointer;
+          }
         }
       }
     }
