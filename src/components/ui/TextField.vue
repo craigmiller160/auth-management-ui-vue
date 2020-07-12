@@ -26,7 +26,7 @@
         type: String,
         required: true
       },
-      modelValue: String,
+      modelValue: [String, Number],
       type: {
         type: String,
         default: 'text'

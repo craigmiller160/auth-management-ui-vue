@@ -107,14 +107,14 @@
     <div class="row">
       <div class="col-4 action-btn-container">
         <!-- TODO include warning about unsaved changes, if there are any -->
-        <button class="btn btn-info">Cancel</button>
+        <button class="btn btn-info" @click="doCancel">Cancel</button>
       </div>
       <div class="col-4 action-btn-container">
-        <button class="btn btn-primary" :disabled="disableSave">Save</button>
+        <button class="btn btn-primary" :disabled="!hasChanges" @click="doSave">Save</button>
       </div>
       <div class="col-4 action-btn-container">
         <!-- TODO include warning before delete -->
-        <button class="btn btn-danger">Delete</button>
+        <button class="btn btn-danger" @click="doDelete">Delete</button>
       </div>
     </div>
   </div>
@@ -140,7 +140,7 @@
         client: {},
         oldClient: {}
       });
-      const disableSave = computed(() => isEqual(state.oldClient, state.client));
+      const hasChanges = computed(() => !isEqual(state.oldClient, state.client));
 
       onMounted(async () => {
         const { id } = router.currentRoute.value.params;
@@ -163,11 +163,26 @@
         }
       };
 
+      const doCancel = () => {
+
+      };
+
+      const doDelete = () => {
+
+      };
+
+      const doSave = () => {
+
+      };
+
       return {
         state,
         generateClientKey,
         generateClientSecret,
-        disableSave
+        hasChanges,
+        doCancel,
+        doDelete,
+        doSave
       };
     }
   };
