@@ -128,8 +128,8 @@
   import { isEqual } from 'lodash-es';
   import { useRouter } from 'vue-router';
   import { generateGuid, getClient } from '@/service/ClientService';
-  import TextField from '@/components/ui/TextField';
-  import Checkbox from '@/components/ui/Checkbox';
+  import TextField from '@/components/ui/form/TextField';
+  import Checkbox from '@/components/ui/form/Checkbox';
 
   export default {
     name: 'ClientDetails',
