@@ -1,19 +1,18 @@
 <template>
-  <div :class="modalClasses" tabindex="-1" role="dialog" :style="modalStyle">
-    <div class="modal-dialog" role="document">
+  <div :class="modalClasses" :style="modalStyle">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <h5 class="modal-title">{{ title }}</h5>
+          <button type="button" class="close" @click="close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+          <slot></slot>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Save changes</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <slot name="footer"></slot>
         </div>
       </div>
     </div>
@@ -21,26 +20,34 @@
 </template>
 
 <script>
-  import { computed, ref } from 'vue';
+  import { computed } from 'vue';
 
   export default {
     name: 'Modal',
-    setup() {
-      const show = ref(false);
-
+    props: {
+      show: {
+        type: Boolean,
+        default: false
+      },
+      title: String
+    },
+    setup(props, { emit }) {
       const modalStyle = computed(() => ({
-        display: show.value ? 'block' : 'none'
+        display: props.show ? 'block' : 'none'
       }));
 
       const modalClasses = computed(() => {
         const base = 'modal fade';
-        const showClazz = show.value ? 'show' : '';
+        const showClazz = props.show ? 'show' : '';
         return `${base} ${showClazz}`;
       });
 
+      const close = () => emit('close');
+
       return {
         modalStyle,
-        modalClasses
+        modalClasses,
+        close
       };
     }
   };
