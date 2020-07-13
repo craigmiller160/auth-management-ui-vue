@@ -235,7 +235,7 @@
 
         if (result) {
           router.push('/clients');
-          store.dispatch(MUTATION_SHOW_SUCCESS_ALERT, `Successfully updated client ${id}`);
+          store.commit(MUTATION_SHOW_SUCCESS_ALERT, `Successfully updated client ${id}`);
         }
       };
 
@@ -245,7 +245,7 @@
 
         if (result) {
           router.push('/clients');
-          store.dispatch(MUTATION_SHOW_SUCCESS_ALERT, `Successfully deleted client ${id}`);
+          store.commit(MUTATION_SHOW_SUCCESS_ALERT, `Successfully deleted client ${id}`);
         }
       };
 
