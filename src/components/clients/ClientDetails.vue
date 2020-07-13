@@ -118,6 +118,11 @@
       </div>
     </div>
   </div>
+  <ConfirmModal
+    :title="state.modal.title"
+    :message="state.modal.message"
+    :show="state.modal.show"
+  />
 </template>
 
 <script>
@@ -130,15 +135,26 @@
   import { generateGuid, getClient } from '@/service/ClientService';
   import TextField from '@/components/ui/form/TextField';
   import Checkbox from '@/components/ui/form/Checkbox';
+  import ConfirmModal from '@/components/ui/modal/ConfirmModal';
 
   export default {
     name: 'ClientDetails',
-    components: { Checkbox, Header, TextField },
+    components: {
+      ConfirmModal,
+      Checkbox,
+      Header,
+      TextField
+    },
     setup() {
       const router = useRouter();
       const state = reactive({
         client: {},
-        oldClient: {}
+        oldClient: {},
+        modal: {
+          show: false,
+          title: '',
+          message: ''
+        }
       });
       const hasChanges = computed(() => !isEqual(state.oldClient, state.client));
 
@@ -164,7 +180,11 @@
       };
 
       const doCancel = () => {
-
+        state.modal = {
+          show: true,
+          title: 'Unsaved Changes',
+          message: 'If you cancel, all unsaved changes will be lost. Are you sure?'
+        };
       };
 
       const doDelete = () => {
