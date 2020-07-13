@@ -21,6 +21,7 @@
             v-model="state.client.clientKey"
             :disabled="true"
             class="grow"
+            :required="true"
           />
           <div class="key-actions">
             <button class="btn btn-warning" @click="generateClientKey">Generate</button>
@@ -174,10 +175,12 @@
         } else {
           const [key, secret] = await Promise.all([generateGuid(), generateGuid()]);
           state.client = {
+            name: 'New Client',
             clientKey: key,
             clientSecret: secret,
             accessTokenTimeoutSecs: 300,
-            refreshTokenTimeoutSecs: 3600
+            refreshTokenTimeoutSecs: 3600,
+            enabled: true
           };
         }
       });
@@ -226,7 +229,7 @@
       };
 
       const enableSaveButton = computed(() => hasChanges.value
-        && state.client.accessTokenTimeoutSecs
+        && state.client.accessTokenTimeoutSecs && state.client.name
         && state.client.refreshTokenTimeoutSecs);
 
       return {
