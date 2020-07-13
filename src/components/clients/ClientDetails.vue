@@ -132,11 +132,13 @@
   } from 'vue';
   import { isEqual } from 'lodash-es';
   import { useRouter } from 'vue-router';
-  import { generateGuid, getClient } from '@/service/ClientService';
+  import { generateGuid, getClient, updateClient } from '@/service/ClientService';
   import TextField from '@/components/ui/form/TextField';
   import Checkbox from '@/components/ui/form/Checkbox';
   import ConfirmModal from '@/components/ui/modal/ConfirmModal';
   import { MODAL_YES } from '@/components/ui/modal/modalConstants';
+  import { MUTATION_SHOW_SUCCESS_ALERT } from '@/store/modules/alert/keys';
+  import { useStore } from 'vuex';
 
   export default {
     name: 'ClientDetails',
@@ -148,6 +150,7 @@
     },
     setup() {
       const router = useRouter();
+      const store = useStore();
       const state = reactive({
         client: {},
         oldClient: {},
@@ -203,8 +206,11 @@
         }
       };
 
-      const doSave = () => {
-
+      const doSave = async () => {
+        const { id } = router.currentRoute.value.params;
+        await updateClient(id, state.client);
+        router.push('/clients');
+        store.dispatch(MUTATION_SHOW_SUCCESS_ALERT, `Successfully updated client ${id}`);
       };
 
       return {
