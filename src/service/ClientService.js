@@ -18,6 +18,7 @@ export const getClient = async (id) => {
     const res = await api.get(`/clients/${id}`);
     return res.data;
   } catch (ex) {
+    // TODO merge this into generic error handling that extracts the response from the server
     console.log(ex);
     store.commit(MUTATION_SHOW_ERROR_ALERT, `Error loading details for client ${id}: ${ex.message}`);
     return undefined;
