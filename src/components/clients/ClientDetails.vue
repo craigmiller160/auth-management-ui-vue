@@ -223,9 +223,8 @@
         store.dispatch(MUTATION_SHOW_SUCCESS_ALERT, `Successfully updated client ${id}`);
       };
 
-      const enableSaveButton = computed(() => {
-        return hasChanges.value && state.client.accessTokenTimeout && state.client.refreshTokenTimeout;
-      });
+      const enableSaveButton = computed(() => hasChanges.value && state.client.accessTokenTimeout
+        && state.client.refreshTokenTimeout);
 
       return {
         state,
