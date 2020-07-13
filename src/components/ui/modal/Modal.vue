@@ -21,6 +21,7 @@
 
 <script>
   import { computed } from 'vue';
+  import { EVENT_MODAL_ACTION, MODAL_CLOSE } from '@/components/ui/modal/modalConstants';
 
   export default {
     name: 'Modal',
@@ -42,7 +43,7 @@
         return `${base} ${showClazz}`;
       });
 
-      const close = () => emit('close');
+      const close = () => emit(EVENT_MODAL_ACTION, MODAL_CLOSE);
 
       return {
         modalStyle,

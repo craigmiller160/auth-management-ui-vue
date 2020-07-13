@@ -121,6 +121,7 @@
     :title="state.modal.title"
     :message="state.modal.message"
     :show="state.modal.show"
+    @modal-action="handleModalAction"
   />
 </template>
 
@@ -135,6 +136,7 @@
   import TextField from '@/components/ui/form/TextField';
   import Checkbox from '@/components/ui/form/Checkbox';
   import ConfirmModal from '@/components/ui/modal/ConfirmModal';
+  import { MODAL_YES } from '@/components/ui/modal/modalConstants';
 
   export default {
     name: 'ClientDetails',
@@ -152,7 +154,8 @@
         modal: {
           show: false,
           title: '',
-          message: ''
+          message: '',
+          successCallback: null
         }
       });
       const hasChanges = computed(() => !isEqual(state.oldClient, state.client));
@@ -178,6 +181,13 @@
         }
       };
 
+      const handleModalAction = (event) => {
+        state.modal.show = false;
+        if (MODAL_YES === event && state.modal.successCallback) {
+          state.modal.successCallback();
+        }
+      };
+
       const doCancel = () => router.push('/clients');
 
       const cancelCheck = () => {
@@ -185,7 +195,8 @@
           state.modal = {
             show: true,
             title: 'Unsaved Changes',
-            message: 'If you cancel, all unsaved changes will be lost. Are you sure?'
+            message: 'If you cancel, all unsaved changes will be lost. Are you sure?',
+            successCallback: doCancel
           };
         } else {
           doCancel();
@@ -202,7 +213,8 @@
         generateClientSecret,
         hasChanges,
         cancelCheck,
-        doSave
+        doSave,
+        handleModalAction
       };
     }
   };

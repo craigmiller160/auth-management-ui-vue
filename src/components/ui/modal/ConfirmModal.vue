@@ -13,6 +13,7 @@
 
 <script>
   import Modal from '@/components/ui/modal/Modal';
+  import { EVENT_MODAL_ACTION, MODAL_NO, MODAL_YES } from '@/components/ui/modal/modalConstants';
 
   export default {
     name: 'ConfirmModal',
@@ -26,8 +27,8 @@
       message: String
     },
     setup(props, { emit }) {
-      const yes = () => emit('yes');
-      const no = () => emit('no');
+      const yes = () => emit(EVENT_MODAL_ACTION, MODAL_YES);
+      const no = () => emit(EVENT_MODAL_ACTION, MODAL_NO);
 
       return {
         yes,
