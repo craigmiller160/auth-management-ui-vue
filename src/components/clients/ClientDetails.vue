@@ -165,9 +165,17 @@
 
       onMounted(async () => {
         const { id } = router.currentRoute.value.params;
-        const client = (await getClient(id)) ?? {};
-        state.client = { ...client };
-        state.oldClient = client;
+        if (id !== 'new') {
+          const client = (await getClient(id)) ?? {};
+          state.client = { ...client };
+          state.oldClient = client;
+        } else {
+          const [key, secret] = await Promise.all([generateGuid(), generateGuid()]);
+          state.client = {
+            clientKey: key,
+            clientSecret: secret
+          };
+        }
       });
 
       const generateClientKey = async () => {
