@@ -28,27 +28,15 @@
     setup() {
       const show = ref(false);
 
-      const modalStyle = computed(() => {
-        if (show.value) {
-          return {
-            display: 'block'
-          };
-        }
-
-        return {
-          display: 'none'
-        };
-      });
+      const modalStyle = computed(() => ({
+        display: show.value ? 'block' : 'none'
+      }));
 
       const modalClasses = computed(() => {
         const base = 'modal fade';
         const showClazz = show.value ? 'show' : '';
         return `${base} ${showClazz}`;
       });
-
-      setTimeout(() => {
-        show.value = true;
-      }, 2000);
 
       return {
         modalStyle,
@@ -59,5 +47,7 @@
 </script>
 
 <style scoped>
-
+  .modal {
+    background-color: rgba(0,0,0,.4);
+  }
 </style>
