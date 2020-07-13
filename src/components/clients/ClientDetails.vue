@@ -115,8 +115,7 @@
         <button class="btn btn-primary" :disabled="!enableSaveButton" @click="doSave">Save</button>
       </div>
       <div class="col-4 action-btn-container">
-        <!-- TODO include warning before delete... also implement functionality -->
-        <button class="btn btn-danger">Delete</button>
+        <button class="btn btn-danger" @click="deleteCheck">Delete</button>
       </div>
     </div>
   </div>
@@ -136,7 +135,7 @@
   import { isEqual } from 'lodash-es';
   import { useRouter } from 'vue-router';
   import {
-    createClient, generateGuid, getClient, updateClient
+    createClient, deleteClient, generateGuid, getClient, updateClient
   } from '@/service/ClientService';
   import TextField from '@/components/ui/form/TextField';
   import Checkbox from '@/components/ui/form/Checkbox';
@@ -240,6 +239,25 @@
         }
       };
 
+      const doDelete = async () => {
+        const { id } = router.currentRoute.value.params;
+        const result = await deleteClient(id);
+
+        if (result) {
+          router.push('/clients');
+          store.dispatch(MUTATION_SHOW_SUCCESS_ALERT, `Successfully deleted client ${id}`);
+        }
+      };
+
+      const deleteCheck = () => {
+        state.modal = {
+          show: true,
+          title: 'Confirm Delete',
+          message: 'Deleting this client cannot be undone. Are you sure?',
+          successCallback: doDelete
+        };
+      };
+
       const enableSaveButton = computed(() => hasChanges.value
         && state.client.accessTokenTimeoutSecs && state.client.name
         && state.client.refreshTokenTimeoutSecs);
@@ -251,7 +269,8 @@
         cancelCheck,
         doSave,
         handleModalAction,
-        enableSaveButton
+        enableSaveButton,
+        deleteCheck
       };
     }
   };

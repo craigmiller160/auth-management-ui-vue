@@ -57,3 +57,14 @@ export const createClient = async (client) => {
     return undefined;
   }
 };
+
+export const deleteClient = async (id) => {
+  try {
+    const res = await api.delete(`/clients/${id}`);
+    return res.data;
+  } catch (ex) {
+    console.log(ex);
+    store.commit(MUTATION_SHOW_ERROR_ALERT, `Error deleting client ${id}: ${ex.message}`);
+    return undefined;
+  }
+};
