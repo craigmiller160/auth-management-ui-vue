@@ -106,15 +106,14 @@
     <hr />
     <div class="row">
       <div class="col-4 action-btn-container">
-        <!-- TODO include warning about unsaved changes, if there are any -->
-        <button class="btn btn-info" @click="doCancel">Cancel</button>
+        <button class="btn btn-info" @click="cancelCheck">Cancel</button>
       </div>
       <div class="col-4 action-btn-container">
         <button class="btn btn-primary" :disabled="!hasChanges" @click="doSave">Save</button>
       </div>
       <div class="col-4 action-btn-container">
         <!-- TODO include warning before delete -->
-        <button class="btn btn-danger" @click="doDelete">Delete</button>
+        <button class="btn btn-danger">Delete</button>
       </div>
     </div>
   </div>
@@ -179,16 +178,18 @@
         }
       };
 
-      const doCancel = () => {
-        state.modal = {
-          show: true,
-          title: 'Unsaved Changes',
-          message: 'If you cancel, all unsaved changes will be lost. Are you sure?'
-        };
-      };
+      const doCancel = () => router.push('/clients');
 
-      const doDelete = () => {
-
+      const cancelCheck = () => {
+        if (hasChanges.value) {
+          state.modal = {
+            show: true,
+            title: 'Unsaved Changes',
+            message: 'If you cancel, all unsaved changes will be lost. Are you sure?'
+          };
+        } else {
+          doCancel();
+        }
       };
 
       const doSave = () => {
@@ -200,8 +201,7 @@
         generateClientKey,
         generateClientSecret,
         hasChanges,
-        doCancel,
-        doDelete,
+        cancelCheck,
         doSave
       };
     }
