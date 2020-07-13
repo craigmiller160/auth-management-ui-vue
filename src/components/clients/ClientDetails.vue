@@ -112,7 +112,7 @@
         <button class="btn btn-primary" :disabled="!hasChanges" @click="doSave">Save</button>
       </div>
       <div class="col-4 action-btn-container">
-        <!-- TODO include warning before delete -->
+        <!-- TODO include warning before delete... also implement functionality -->
         <button class="btn btn-danger">Delete</button>
       </div>
     </div>

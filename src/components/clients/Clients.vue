@@ -22,6 +22,11 @@
       </table>
     </div>
   </div>
+  <div class="row">
+    <div class="col">
+      <router-link to="/clients/new" class="btn btn-primary">New Client</router-link>
+    </div>
+  </div>
 </template>
 
 <script>
