@@ -65,6 +65,11 @@
             exists: true,
             message: 'Field is required'
           };
+        } else {
+          state.error = {
+            exists: false,
+            message: ''
+          };
         }
       });
 

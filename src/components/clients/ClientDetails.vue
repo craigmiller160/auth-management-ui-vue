@@ -175,7 +175,9 @@
           const [key, secret] = await Promise.all([generateGuid(), generateGuid()]);
           state.client = {
             clientKey: key,
-            clientSecret: secret
+            clientSecret: secret,
+            accessTokenTimeoutSecs: 300,
+            refreshTokenTimeoutSecs: 3600
           };
         }
       });
@@ -223,8 +225,9 @@
         store.dispatch(MUTATION_SHOW_SUCCESS_ALERT, `Successfully updated client ${id}`);
       };
 
-      const enableSaveButton = computed(() => hasChanges.value && state.client.accessTokenTimeout
-        && state.client.refreshTokenTimeout);
+      const enableSaveButton = computed(() => hasChanges.value
+        && state.client.accessTokenTimeoutSecs
+        && state.client.refreshTokenTimeoutSecs);
 
       return {
         state,
