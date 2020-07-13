@@ -34,3 +34,25 @@ export const generateGuid = async () => {
     return undefined;
   }
 };
+
+export const updateClient = async (id, client) => {
+  try {
+    const res = await api.put(`/clients/${id}`, client);
+    return res.data;
+  } catch (ex) {
+    console.log(ex);
+    store.commit(MUTATION_SHOW_ERROR_ALERT, `Error updating client ${id}: ${ex.message}`);
+    return undefined;
+  }
+};
+
+export const createClient = async (client) => {
+  try {
+    const res = await api.post('/clients', client);
+    return res.data;
+  } catch (ex) {
+    console.log(ex);
+    store.commit(MUTATION_SHOW_ERROR_ALERT, `Error creating client: ${ex.message}`);
+    return undefined;
+  }
+};
