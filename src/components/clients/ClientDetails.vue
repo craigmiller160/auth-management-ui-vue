@@ -223,9 +223,11 @@
 
       const doSave = async () => {
         const { id } = router.currentRoute.value.params;
-        await updateClient(id, state.client);
-        router.push('/clients');
-        store.dispatch(MUTATION_SHOW_SUCCESS_ALERT, `Successfully updated client ${id}`);
+        const result = await updateClient(id, state.client);
+        if (result) {
+          router.push('/clients');
+          store.dispatch(MUTATION_SHOW_SUCCESS_ALERT, `Successfully updated client ${id}`);
+        }
       };
 
       const enableSaveButton = computed(() => hasChanges.value
