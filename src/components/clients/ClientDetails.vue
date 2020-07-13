@@ -145,6 +145,8 @@
   import { MUTATION_SHOW_SUCCESS_ALERT } from '@/store/modules/alert/keys';
   import { useStore } from 'vuex';
 
+  const ID_NEW = 'new';
+
   export default {
     name: 'ClientDetails',
     components: {
@@ -170,7 +172,7 @@
 
       onMounted(async () => {
         const { id } = router.currentRoute.value.params;
-        if (id !== 'new') {
+        if (id !== ID_NEW) {
           const client = (await getClient(id)) ?? {};
           state.client = { ...client };
           state.oldClient = client;
@@ -226,7 +228,7 @@
       const doSave = async () => {
         const { id } = router.currentRoute.value.params;
         let result;
-        if (id === 'new') {
+        if (id === ID_NEW) {
           result = await createClient(state.client);
         } else {
           result = await updateClient(id, state.client);
