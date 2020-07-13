@@ -89,6 +89,7 @@
           label="Access Token Timeout (Secs)"
           type="number"
           v-model="state.client.accessTokenTimeoutSecs"
+          :required="true"
         />
       </div>
       <div class="col-4 offset-2">
@@ -97,6 +98,7 @@
           label="Refresh Token Timeout (Secs)"
           type="number"
           v-model="state.client.refreshTokenTimeoutSecs"
+          :required="true"
         />
       </div>
     </div>
@@ -109,7 +111,7 @@
         <button class="btn btn-info" @click="cancelCheck">Cancel</button>
       </div>
       <div class="col-4 action-btn-container">
-        <button class="btn btn-primary" :disabled="!hasChanges" @click="doSave">Save</button>
+        <button class="btn btn-primary" :disabled="!enableSaveButton" @click="doSave">Save</button>
       </div>
       <div class="col-4 action-btn-container">
         <!-- TODO include warning before delete... also implement functionality -->
@@ -221,14 +223,18 @@
         store.dispatch(MUTATION_SHOW_SUCCESS_ALERT, `Successfully updated client ${id}`);
       };
 
+      const enableSaveButton = computed(() => {
+        return hasChanges.value && state.client.accessTokenTimeout && state.client.refreshTokenTimeout;
+      });
+
       return {
         state,
         generateClientKey,
         generateClientSecret,
-        hasChanges,
         cancelCheck,
         doSave,
-        handleModalAction
+        handleModalAction,
+        enableSaveButton
       };
     }
   };

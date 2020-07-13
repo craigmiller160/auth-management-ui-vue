@@ -4,16 +4,17 @@
     <input
       :id="id"
       :name="name"
-      class="form-control"
+      :class="inputClasses"
       :type="type"
       v-model="value"
       :disabled="disabled"
     />
+    <p class="error-msg" v-if="state.error.exists">{{ state.error.message }}</p>
   </div>
 </template>
 
 <script>
-  import { computed } from 'vue';
+  import { computed, reactive, watch } from 'vue';
 
   export default {
     name: 'Input',
@@ -34,6 +35,10 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      required: {
+        type: Boolean,
+        default: false
       }
     },
     setup(props, { emit }) {
@@ -42,10 +47,32 @@
         get: () => props.modelValue,
         set: (val) => emit('update:modelValue', val)
       });
+      const state = reactive({
+        error: {
+          exists: false,
+          message: ''
+        }
+      });
+      const inputClasses = computed(() => {
+        const base = 'form-control';
+        const error = state.error.exists ? 'error-input' : '';
+        return `${base} ${error}`;
+      });
+
+      watch(value, (newValue) => {
+        if (props.required && !newValue) {
+          state.error = {
+            exists: true,
+            message: 'Field is required'
+          };
+        }
+      });
 
       return {
         id,
-        value
+        value,
+        inputClasses,
+        state
       };
     }
   };
@@ -54,5 +81,13 @@
 <style scoped lang="scss">
   label {
     font-weight: bold;
+  }
+
+  .error-input {
+    border: 1px solid red;
+  }
+
+  .error-msg {
+    color: red;
   }
 </style>
