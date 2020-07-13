@@ -135,7 +135,9 @@
   } from 'vue';
   import { isEqual } from 'lodash-es';
   import { useRouter } from 'vue-router';
-  import { generateGuid, getClient, updateClient } from '@/service/ClientService';
+  import {
+    createClient, generateGuid, getClient, updateClient
+  } from '@/service/ClientService';
   import TextField from '@/components/ui/form/TextField';
   import Checkbox from '@/components/ui/form/Checkbox';
   import ConfirmModal from '@/components/ui/modal/ConfirmModal';
@@ -223,7 +225,13 @@
 
       const doSave = async () => {
         const { id } = router.currentRoute.value.params;
-        const result = await updateClient(id, state.client);
+        let result;
+        if (id === 'new') {
+          result = await createClient(state.client);
+        } else {
+          result = await updateClient(id, state.client);
+        }
+
         if (result) {
           router.push('/clients');
           store.dispatch(MUTATION_SHOW_SUCCESS_ALERT, `Successfully updated client ${id}`);
