@@ -7,7 +7,7 @@ export const getClients = () => api.get({
 
 export const getClient = (id) => api.get({
   uri: `/clients/${id}`,
-  errorMsg: 'Error loading details for client'
+  errorMsg: `Error loading details for client ${id}`
 });
 
 export const generateGuid = () => api.get({
