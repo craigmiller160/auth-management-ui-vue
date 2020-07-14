@@ -1,6 +1,10 @@
 import store from '@/store';
 import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
-import api from './api';
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: '/api'
+});
 
 export const logout = () => api.get('/oauth/logout');
 
