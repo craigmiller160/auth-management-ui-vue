@@ -267,6 +267,8 @@
 </script>
 
 <style scoped lang="scss">
+  @import "../../assets/scss/form";
+
   .grow {
     width: 60%;
   }
@@ -278,14 +280,6 @@
 
     button {
       margin-bottom: 1rem;
-    }
-  }
-
-  .form-section {
-    margin-top: 2rem;
-
-    h3 {
-      text-align: center;
     }
   }
 

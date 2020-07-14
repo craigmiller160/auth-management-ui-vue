@@ -1,49 +1,59 @@
 <template>
   <Header text="User Details" />
-  <div class="row">
-    <div class="col-4 offset-4">
-      <TextField
-        name="email"
-        label="Email"
-        type="email"
-        v-model="state.user.email"
-        :required="true"
-      />
+  <div class="form-section">
+    <h3>Account</h3>
+    <hr />
+    <div class="row">
+      <div class="col-4 offset-4">
+        <TextField
+          name="email"
+          label="Email"
+          type="email"
+          v-model="state.user.email"
+          :required="true"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4 offset-2">
+        <TextField
+          name="password"
+          label="New Password"
+          type="password"
+          v-model="state.user.password"
+        />
+      </div>
+      <div class="col-4">
+        <!-- TODO need to figure out validation for matching the passwords -->
+        <TextField
+          name="confirmPassword"
+          label="Confirm New Password"
+          type="password"
+          v-model="state.confirmPassword"
+        />
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-4 offset-2">
-      <TextField
-        name="password"
-        label="New Password"
-        type="password"
-        v-model="state.user.password"
-      />
-    </div>
-    <div class="col-4">
-      <!-- TODO need to figure out validation for matching the passwords -->
-      <TextField
-        name="confirmPassword"
-        label="Confirm New Password"
-        type="password"
-        v-model="state.confirmPassword"
-      />
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-4 offset-2">
-      <TextField
-        name="firstName"
-        label="First Name"
-        v-model="state.user.firstName"
-      />
-    </div>
-    <div class="col-4">
-      <TextField
-        name="lastName"
-        label="Last Name"
-        v-model="state.user.lastName"
-      />
+  <div class="form-section">
+    <h3>Personal</h3>
+    <hr />
+    <div class="row">
+      <div class="col-4 offset-2">
+        <TextField
+          name="firstName"
+          label="First Name"
+          v-model="state.user.firstName"
+          :required="true"
+        />
+      </div>
+      <div class="col-4">
+        <TextField
+          name="lastName"
+          label="Last Name"
+          v-model="state.user.lastName"
+          :required="true"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -85,6 +95,6 @@
   };
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  @import "../../assets/scss/form";
 </style>
