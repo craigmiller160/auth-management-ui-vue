@@ -2,7 +2,7 @@
   <Header text="Users" />
   <div class="row">
     <div class="col">
-      <table class="table">
+      <table class="table table-striped table-hover">
         <thead>
         <tr>
           <th>Email</th>
@@ -11,50 +11,59 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="user in state.data" :key="user.email">
+        <tr
+          v-for="user in state.data"
+          :key="user.email"
+          @click="userClick(user.id)"
+        >
           <td>{{ user.email }}</td>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
+          <!-- TODO need client name and client filter for this page -->
         </tr>
         </tbody>
       </table>
     </div>
   </div>
+  <div class="row">
+    <div class="col">
+      <router-link to="/users/new" class="btn btn-primary">New User</router-link>
+    </div>
+  </div>
 </template>
 
 <script>
-  import { useStore } from 'vuex';
-  import { reactive, onMounted } from 'vue';
+  import { onMounted, reactive } from 'vue';
   import Header from '@/components/ui/Header';
   import { getUsers } from '@/service/UserService';
-  import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
+  import { useRouter } from 'vue-router';
 
   export default {
     name: 'Users',
     components: { Header },
     setup() {
-      const store = useStore();
+      const router = useRouter();
       const state = reactive({
         data: []
       });
 
       onMounted(async () => {
-        try {
-          const userData = await getUsers();
-          state.data = userData.users;
-        } catch (ex) {
-          console.log(ex);
-          store.commit(MUTATION_SHOW_ERROR_ALERT, `Error loading users: ${ex.message}`);
-        }
+        const userData = await getUsers();
+        state.data = userData?.users ?? {};
       });
 
+      const userClick = (id) => router.push(`/users/${id}`);
+
       return {
-        state
+        state,
+        userClick
       };
     }
   };
 </script>
 
 <style scoped>
-
+  tr {
+    cursor: pointer;
+  }
 </style>
