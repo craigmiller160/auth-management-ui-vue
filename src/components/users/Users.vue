@@ -26,7 +26,7 @@
   import { useStore } from 'vuex';
   import { reactive, onMounted } from 'vue';
   import Header from '@/components/ui/Header';
-  import { getUsers } from '@/service/BasicService';
+  import { getUsers } from '@/service/UserService';
   import { MUTATION_SHOW_ERROR_ALERT } from '@/store/modules/alert/keys';
 
   export default {

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/components/Home';
-import Users from '@/components/Users';
+import Users from '@/components/users/Users';
 import Clients from '@/components/clients/Clients';
 import { isAuthorizedGuard } from '@/router/guards';
 import ClientDetails from '@/components/clients/ClientDetails';
