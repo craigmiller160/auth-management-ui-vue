@@ -56,6 +56,21 @@
       </div>
     </div>
   </div>
+  <div class="form-section">
+    <h3>Actions</h3>
+    <hr />
+    <div class="row">
+      <div class="col-4 action-btn-container">
+        <button class="btn btn-info">Cancel</button>
+      </div>
+      <div class="col-4 action-btn-container">
+        <button class="btn btn-primary">Save</button>
+      </div>
+      <div class="col-4 action-btn-container">
+        <button class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -97,4 +112,9 @@
 
 <style scoped lang="scss">
   @import "../../assets/scss/form";
+
+  .action-btn-container {
+    display: flex;
+    justify-content: center;
+  }
 </style>
