@@ -19,7 +19,8 @@ module.exports = {
     indent: 0,
     'vue/script-indent': ['error', 2, {
       baseIndent: 1
-    }]
+    }],
+    'import/prefer-default-export': 0
   },
   overrides: [
     {

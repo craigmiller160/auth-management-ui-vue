@@ -120,10 +120,16 @@
     </div>
   </div>
   <ConfirmModal
-    :title="state.modal.title"
-    :message="state.modal.message"
-    :show="state.modal.show"
-    @modal-action="handleModalAction"
+    :title="cancelModal.state.title"
+    :message="cancelModal.state.message"
+    :show="cancelModal.state.show"
+    @modal-action="cancelModal.action"
+  />
+  <ConfirmModal
+    :title="deleteModal.state.title"
+    :message="deleteModal.state.message"
+    :show="deleteModal.state.show"
+    @modal-action="deleteModal.action"
   />
 </template>
 
@@ -140,9 +146,9 @@
   import TextField from '@/components/ui/form/TextField';
   import Checkbox from '@/components/ui/form/Checkbox';
   import ConfirmModal from '@/components/ui/modal/ConfirmModal';
-  import { MODAL_YES } from '@/components/ui/modal/modalConstants';
   import { MUTATION_SHOW_SUCCESS_ALERT } from '@/store/modules/alert/keys';
   import { useStore } from 'vuex';
+  import { useConfirmModal } from '@/hooks/useModal';
 
   const ID_NEW = 'new';
 
@@ -159,13 +165,7 @@
       const store = useStore();
       const state = reactive({
         client: {},
-        oldClient: {},
-        modal: {
-          show: false,
-          title: '',
-          message: '',
-          successCallback: null
-        }
+        oldClient: {}
       });
       const hasChanges = computed(() => !isEqual(state.oldClient, state.client));
 
@@ -202,23 +202,16 @@
         }
       };
 
-      const handleModalAction = (event) => {
-        state.modal.show = false;
-        if (MODAL_YES === event && state.modal.successCallback) {
-          state.modal.successCallback();
-        }
-      };
-
       const doCancel = () => router.push('/clients');
+      const cancelModal = useConfirmModal({
+        title: 'Unsaved Changes',
+        message: 'If you cancel, all unsaved changes will be lost. Are you sure?',
+        successCallback: doCancel
+      });
 
       const cancelCheck = () => {
         if (hasChanges.value) {
-          state.modal = {
-            show: true,
-            title: 'Unsaved Changes',
-            message: 'If you cancel, all unsaved changes will be lost. Are you sure?',
-            successCallback: doCancel
-          };
+          cancelModal.show();
         } else {
           doCancel();
         }
@@ -248,15 +241,11 @@
           store.commit(MUTATION_SHOW_SUCCESS_ALERT, `Successfully deleted client ${id}`);
         }
       };
-
-      const deleteCheck = () => {
-        state.modal = {
-          show: true,
-          title: 'Confirm Delete',
-          message: 'Deleting this client cannot be undone. Are you sure?',
-          successCallback: doDelete
-        };
-      };
+      const deleteModal = useConfirmModal({
+        title: 'Confirm Delete',
+        message: 'Deleting this client cannot be undone. Are you sure?',
+        successCallback: doDelete
+      });
 
       const enableSaveButton = computed(() => hasChanges.value
         && state.client.accessTokenTimeoutSecs && state.client.name
@@ -268,9 +257,10 @@
         generateClientSecret,
         cancelCheck,
         doSave,
-        handleModalAction,
+        cancelModal,
+        deleteModal,
         enableSaveButton,
-        deleteCheck
+        deleteCheck: deleteModal.show
       };
     }
   };
