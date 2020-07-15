@@ -6,6 +6,8 @@ import 'bootstrap/scss/bootstrap.scss';
 import router from './router';
 import store from './store';
 
+console.log(require('vue')); // TODO delete this
+
 const setup = async () => {
   const authUser = await getAuthUser();
   store.commit(MUTATION_SET_USER_DATA, authUser);
