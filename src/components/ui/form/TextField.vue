@@ -1,36 +1,24 @@
 <template>
-<!--  <validation-provider rules="required" v-slot="{ errors }">-->
-    <div class="form-group">
-      <label :for="id">{{ label }}</label>
-      <input
-        :id="id"
-        :name="name"
-        :class="inputClasses"
-        :type="type"
-        v-model="value"
-        :disabled="disabled"
-      />
-<!--      <p class="error-msg" v-if="state.error.exists">{{ state.error.message }}</p>-->
-      <span>{{ errors[0] }}</span>
-    </div>
-<!--  </validation-provider>-->
+  <div class="form-group">
+    <label :for="id">{{ label }}</label>
+    <input
+      :id="id"
+      :name="name"
+      :class="inputClasses"
+      :type="type"
+      v-model="value"
+      :disabled="disabled"
+    />
+      <p class="error-msg" v-if="state.error.exists">{{ state.error.message }}</p>
+    <span>{{ errors[0] }}</span>
+  </div>
 </template>
 
 <script>
   import { computed, reactive, watch } from 'vue';
-  // import { ValidationProvider, extend } from 'vee-validate';
-  // import { required } from 'vee-validate/dist/rules';
 
-  // extend('required', {
-  //   ...required,
-  //   message: 'This field is required'
-  // });
-  //
   export default {
     name: 'Input',
-    // components: {
-    //   ValidationProvider
-    // },
     props: {
       label: {
         type: String,
@@ -72,19 +60,19 @@
         return `${base} ${error}`;
       });
 
-      // watch(value, (newValue) => {
-      //   if (props.required && !newValue) {
-      //     state.error = {
-      //       exists: true,
-      //       message: 'Field is required'
-      //     };
-      //   } else {
-      //     state.error = {
-      //       exists: false,
-      //       message: ''
-      //     };
-      //   }
-      // });
+      watch(value, (newValue) => {
+        if (props.required && !newValue) {
+          state.error = {
+            exists: true,
+            message: 'Field is required'
+          };
+        } else {
+          state.error = {
+            exists: false,
+            message: ''
+          };
+        }
+      });
 
       return {
         id,
