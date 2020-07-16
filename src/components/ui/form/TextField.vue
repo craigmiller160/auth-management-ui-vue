@@ -1,5 +1,5 @@
 <template>
-  <validation-provider rules="required" v-slot="{ errors }">
+<!--  <validation-provider rules="required" v-slot="{ errors }">-->
     <div class="form-group">
       <label :for="id">{{ label }}</label>
       <input
@@ -13,24 +13,24 @@
 <!--      <p class="error-msg" v-if="state.error.exists">{{ state.error.message }}</p>-->
       <span>{{ errors[0] }}</span>
     </div>
-  </validation-provider>
+<!--  </validation-provider>-->
 </template>
 
 <script>
   import { computed, reactive, watch } from 'vue';
-  import { ValidationProvider, extend } from 'vee-validate';
-  import { required } from 'vee-validate/dist/rules';
+  // import { ValidationProvider, extend } from 'vee-validate';
+  // import { required } from 'vee-validate/dist/rules';
 
-  extend('required', {
-    ...required,
-    message: 'This field is required'
-  });
-
+  // extend('required', {
+  //   ...required,
+  //   message: 'This field is required'
+  // });
+  //
   export default {
     name: 'Input',
-    components: {
-      ValidationProvider
-    },
+    // components: {
+    //   ValidationProvider
+    // },
     props: {
       label: {
         type: String,
